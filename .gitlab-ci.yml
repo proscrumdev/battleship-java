@@ -1,0 +1,20 @@
+image: java
+
+stages: 
+  - test
+  - analyze
+
+cache: 
+  paths: 
+    - .gradle/
+
+unit test:
+  stage: test
+  script:
+  - ./gradlew test
+
+sonar:
+  stage: analyze
+  script:
+  - ./gradlew sonarqube -Dsonar.host.url=$$$SONAR_URL$$$ -Dsonar.projectKey=$$$SONAR_PROJECT_KEY$$$ -Dsonar.projectName=$$$SONAR_PROJECT_KEY$$$
+
