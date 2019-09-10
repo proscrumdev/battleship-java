@@ -24,11 +24,20 @@ subprojects {
     sourceCompatibility = 1.8
 
     dependencies {
-        testCompile 'junit:junit:4.12',
-                'org.slf4j:slf4j-api:1.7.25',
+        testCompile 'org.slf4j:slf4j-api:1.7.25',
                 'info.cukes:cucumber-junit:1.2.5',
                 'info.cukes:cucumber-java:1.2.5',
                 'org.jacoco:org.jacoco.ant:0.8.1'
+
+        testCompileOnly 'junit:junit:4.12'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.0',
+                'org.junit.vintage:junit-vintage-engine:5.5.0'
+
+    }
+
+    test {
+        useJUnitPlatform()
     }
 }
 
