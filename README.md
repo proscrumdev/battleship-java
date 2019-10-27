@@ -1,3 +1,5 @@
+[![Build status](https://psdstewards.visualstudio.com/PSD/_apis/build/status/proscrumdev.battleship-java-CI)](https://psdstewards.visualstudio.com/PSD/_build/latest?definitionId=15)
+
 # Battleship Java
 
 A simple game of Battleship, written in Java.
