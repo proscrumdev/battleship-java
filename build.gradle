@@ -25,8 +25,8 @@ subprojects {
 
     dependencies {
         testCompile 'org.slf4j:slf4j-api:1.7.25',
-                'info.cukes:cucumber-junit:1.2.5',
-                'info.cukes:cucumber-java:1.2.5',
+                'io.cucumber:cucumber-junit:4.8.0',
+                'io.cucumber:cucumber-java:4.8.0',
                 'org.jacoco:org.jacoco.ant:0.8.1'
 
         testCompileOnly 'junit:junit:4.12'
