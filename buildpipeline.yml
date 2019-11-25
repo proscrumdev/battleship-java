@@ -11,11 +11,16 @@ pool:
   demands: java
 
 steps:
-- task: Gradle@2
-  displayName: 'gradlew build'
+- task: Maven@3
   inputs:
-    gradleWrapperFile: 'gradlew'
-    tasks: 'build'
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
