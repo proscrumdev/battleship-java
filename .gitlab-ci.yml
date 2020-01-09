@@ -5,10 +5,6 @@ stages:
   - build
   - analyze
 
-artifacts:
-  paths:
-    - build/distributions
-
 cache: 
   paths: 
     - .gradle/
@@ -22,6 +18,9 @@ build:
   stage: build
   script:
     - ./gradlew build
+  artifacts:
+    paths:
+      - ./console-app/build/distributions
 
 sonar:
   stage: analyze
