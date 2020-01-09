@@ -2,7 +2,12 @@ image: java
 
 stages: 
   - test
+  - build
   - analyze
+
+artifacts:
+  paths:
+    - build/distributions
 
 cache: 
   paths: 
@@ -11,7 +16,12 @@ cache:
 unit test:
   stage: test
   script:
-  - ./gradlew test
+    - ./gradlew test
+
+build:
+  stage: build
+  script:
+    - ./gradlew build
 
 sonar:
   stage: analyze
