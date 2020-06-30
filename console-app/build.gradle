@@ -1,10 +1,10 @@
 apply plugin: 'application'
 
 dependencies {
-    compile project(':game-controller')
-    compile 'com.diogonunes:JCDP:2.0.3.1'
+    implementation project(':game-controller')
+    implementation 'com.diogonunes:JCDP:4.0.2'
 
-    testCompile 'com.github.stefanbirkner:system-rules:1.17.1'
+    testImplementation 'com.github.stefanbirkner:system-rules:1.19.0'
 }
 
 mainClassName = "org.scrum.psd.battleship.ascii.Main"
@@ -12,7 +12,7 @@ mainClassName = "org.scrum.psd.battleship.ascii.Main"
 jar {
     manifest {
         attributes(
-                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Class-Path': configurations.runtimeClasspath.files.collect { it.getName() }.join(' '),
                 'Main-Class': mainClassName
         )
     }

@@ -17,7 +17,7 @@ public class Main {
     private static ColoredPrinter console;
 
     public static void main(String[] args) {
-        console = new ColoredPrinter.Builder(1, false).build();
+        console = new ColoredPrinter.Builder(1, false).background(Ansi.BColor.BLACK).foreground(Ansi.FColor.WHITE).build();
 
         console.setForegroundColor(Ansi.FColor.MAGENTA);
         console.println("                                     |__");
@@ -34,7 +34,7 @@ public class Main {
         console.println("|                        Welcome to Battleship                         BB-61/");
         console.println(" \\_________________________________________________________________________|");
         console.println("");
-        console.clear();
+        console.setForegroundColor(Ansi.FColor.WHITE);
 
         InitializeGame();
 

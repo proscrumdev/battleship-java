@@ -1,4 +1,4 @@
-image: java
+image: openjdk:15
 
 stages: 
   - test
