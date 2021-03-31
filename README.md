@@ -1,4 +1,4 @@
-[![Build status](https://psdstewards.visualstudio.com/PSD/_apis/build/status/proscrumdev.battleship-java-CI)](https://psdstewards.visualstudio.com/PSD/_build/latest?definitionId=15)
+[![Build status](https://dev.azure.com/APS-SD-Stewards/APS-SD/_apis/build/status/proscrumdev.battleship-java-CI)](https://dev.azure.com/APS-SD-Stewards/APS-SD/_build/latest?definitionId=15)
 
 # Battleship Java
 
