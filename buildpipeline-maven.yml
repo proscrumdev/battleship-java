@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  name: Hosted Ubuntu 1604
+  vmImage: 'ubuntu-latest'
   demands: java
 
 steps:
