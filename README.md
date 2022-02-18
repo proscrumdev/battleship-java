@@ -36,6 +36,16 @@ docker run -it -v ${PWD}:/battleship -w /battleship openjdk:15 bash
 
 This will run a Docker container with your battleship case study mounted into it. The container will run in interactive mode and you can execute Gradle commands from the shell (see examples below).
 
+If you are using Docker for Windows you might run into issues and get a message like
+```bash
+env: ‘sh\r’: No such file or directory
+```
+The reason for this is that Windows uses CRLF while Linux (in the Docker Container) uses only CR
+You can solve the issue by cloning the repository with a specific parameter:
+```bash
+git clone https://github.com/proscrumdev/battleship-java.git  --config core.autocrlf=input
+```
+
 # Launching the game
 
 ```bash
