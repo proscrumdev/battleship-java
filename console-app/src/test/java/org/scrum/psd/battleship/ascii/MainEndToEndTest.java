@@ -39,4 +39,21 @@ public class MainEndToEndTest {
             Assert.assertTrue(systemOutRule.getLog().contains("Miss"));
         }
     }
+
+    @Test
+    public void testSunkTheShipsAndExit() {
+        try {
+            gameInput.provideLines( "a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "d1", "d2", "d3", "e1", "e2",
+                    "b4", "b5", "b6", "b7", "b8",
+                    "e6", "e7", "e8", "e9",
+                    "a3", "b3", "c3",
+                    "f8", "g8", "h8",
+                    "c5", "c6");
+
+            Main.main(new String[]{});
+        } catch(NoSuchElementException e) {
+            Assert.assertTrue(systemOutRule.getLog().contains("Welcome to Battleship"));
+            Assert.assertTrue(systemOutRule.getLog().contains("The End"));
+        }
+    }
 }
