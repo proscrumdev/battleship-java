@@ -6,6 +6,11 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
+import org.scrum.psd.battleship.controller.dto.Status;
+import org.scrum.psd.battleship.controller.dto.Ship;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Execution(ExecutionMode.CONCURRENT)
 public class MainTest {
@@ -25,5 +30,34 @@ public class MainTest {
         Position actual = Main.parsePosition("B1");
         //then
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testCheckGameEndsMyFleetDestroyed() {
+        List<Ship> myfleet = Arrays.asList(buildShip("s1", true), buildShip("s2", true));
+        List<Ship> enemyfleet = Arrays.asList(buildShip("e1", false), buildShip("e2", false));
+        Assertions.assertEquals(Status.LOST, Main.checkGameEnds(myfleet, enemyfleet));
+    }
+
+    @Test
+    public void testCheckGameEndsMyEnemyDestroyed() {
+        List<Ship> myfleet = Arrays.asList(buildShip("s1", false), buildShip("s2", false));
+        List<Ship> enemyfleet = Arrays.asList(buildShip("e1", true), buildShip("e2", true));
+        Assertions.assertEquals(Status.WIN, Main.checkGameEnds(myfleet, enemyfleet));
+    }
+
+    @Test
+    public void testCheckGameEndsNotEnded() {
+        List<Ship> myfleet = Arrays.asList(buildShip("s1", true), buildShip("s2", false));
+        List<Ship> enemyfleet = Arrays.asList(buildShip("e1", true), buildShip("e2", false));
+        Assertions.assertEquals(Status.RUNNING, Main.checkGameEnds(myfleet, enemyfleet));
+    }
+
+    private Ship buildShip(String name, boolean isDestroyed) {
+        Ship s = new Ship();
+        s.setDestroyed(isDestroyed);
+        s.setName(name);
+
+        return s;
     }
 }
