@@ -5,6 +5,7 @@ import com.diogonunes.jcdp.color.api.Ansi;
 import org.scrum.psd.battleship.controller.GameController;
 import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
+import org.scrum.psd.battleship.controller.dto.Status;
 import org.scrum.psd.battleship.controller.dto.Ship;
 
 import java.util.List;
@@ -56,6 +57,8 @@ public class Main {
         console.println("   \\    \\_/");
         console.println("    \" \"\" \"\" \"\" \"");
 
+        boolean isGameRunning = true;
+
         do {
             console.println("");
             console.println("Player, it's your turn");
@@ -94,7 +97,20 @@ public class Main {
                 console.println("                   \\  \\   /  /");
 
             }
-        } while (true);
+            Status status = checkGameEnds(myFleet, enemyFleet);
+            if (status == Status.WIN) {
+                console.println("you win!!!!");
+                status = Status.END;
+            }
+            if (status == Status.WIN) {
+                console.println("you lost!!!!");
+                status = Status.END;
+            }
+            if (status == Status.END) {
+                isGameRunning = false;
+                console.println("The End");
+            }
+        } while (isGameRunning);
     }
 
     private static void beep() {
@@ -165,5 +181,15 @@ public class Main {
 
         enemyFleet.get(4).getPositions().add(new Position(Letter.C, 5));
         enemyFleet.get(4).getPositions().add(new Position(Letter.C, 6));
+    }
+
+    protected static Status checkGameEnds(List<Ship> myFleet, List<Ship> enemyFleet) {
+        if (enemyFleet.stream().allMatch(Ship::isDestroyed)) {
+            return Status.WIN;
+        }
+        if (myFleet.stream().allMatch(Ship::isDestroyed)) {
+            return Status.LOST;
+        }
+        return Status.RUNNING;
     }
 }

@@ -9,6 +9,7 @@ public class Ship {
     private int size;
     private List<Position> positions;
     private Color color;
+    private boolean isDestroyed;
 
     public Ship() {
         this.positions = new ArrayList<>();
@@ -52,6 +53,14 @@ public class Ship {
 
     public void setPlaced(boolean placed) {
         isPlaced = placed;
+    }
+
+    public boolean isDestroyed() {
+        return isDestroyed;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        isDestroyed = destroyed;
     }
 
     public String getName() {
