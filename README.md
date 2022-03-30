@@ -60,6 +60,14 @@ git clone https://github.com/proscrumdev/battleship-java.git  --config core.auto
 ```
 
 # Battleship Game:
-The game is played on a 8x8 grid and the individual squares in the grid are identified by letter and number. Before play begins, each player secretly arranges their ships on their grid. Each ship occupies a number of consecutive squares on the grid, arranged either horizontally or vertically. The number of squares for each ship is determined by the type of ship. The ships cannot overlap (i.e., only one ship can occupy any given square in the grid). The ships are hidden from players sight and it's not allowed to see each other's pieces. The game is a discovery game which players need to discover their opponents ship positions.
-After the ships have been positioned, the game proceeds in a series of rounds. In each round, each player takes a turn to record a target square in the opponent's grid which is to be shot at. The game displays whether or not the square is occupied by a ship.
-When all of the squares of a ship have been hit, the game displays the sinking of the Aircraft Carrier, Battleship, Submarine, Destroyer and Patrol Boat. If all of a player's ships have been sunk, the game is over and their opponent wins. If all ships of both players are sunk by the end of the round, the game is a draw.
+The game is played on a 10x10 grid and the individual squares in the grid are identified by letter and number. 
+Before play begins, the player secretly arranges their ships on their grid and the opponent(Computer) arranges their ships randomly on the grid. 
+Each ship occupies a number of consecutive squares on the grid, arranged either horizontally or vertically. 
+The number of squares for each ship is determined by the type of ship. The ships cannot overlap (i.e., only one ship can occupy any given square in the grid). 
+The ships are hidden from players sight and it's not allowed to see each other's pieces. 
+The game is a discovery game which players need to discover their opponents ship positions.
+After the ships have been positioned, the game proceeds in a series of rounds. In each round, each player takes a turn to record a target square in the opponent's grid which is to be shot at. 
+The game displays whether or not the square is occupied by a ship.
+When all of the squares of a ship have been hit, the game displays the sinking of the Aircraft Carrier, Battleship, Submarine, Destroyer and Patrol Boat. 
+If all of a player's ships have been sunk, the game is over and their opponent(Computer) wins. 
+If all ships of both players are sunk by the end of the round, the game is a draw.
