@@ -11,6 +11,7 @@ import org.scrum.psd.battleship.controller.dto.Ship;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     private static List<Ship> myFleet;
@@ -133,6 +134,16 @@ public class Main {
         return position;
     }
 
+    private static void showPositions(List<Ship> ships, String type){
+        System.out.println("Battleship Position for "+type);
+        for (Ship  ship: ships) {
+            String positions = String.join(",", ship.getPositions().stream().map(Position::toString).collect(Collectors.toList()));
+            System.out.println(String.format("Ship: %s, positions: %s", ship.getName(), positions));
+        }
+
+    }
+
+
     private static void InitializeGame() {
         InitializeMyFleet();
 
@@ -155,6 +166,7 @@ public class Main {
                 ship.addPosition(positionInput);
             }
         }
+        showPositions(myFleet, "MyFleet");
     }
 
     private static void InitializeEnemyFleet() {
@@ -181,6 +193,7 @@ public class Main {
 
         enemyFleet.get(4).getPositions().add(new Position(Letter.C, 5));
         enemyFleet.get(4).getPositions().add(new Position(Letter.C, 6));
+        showPositions(enemyFleet, "EnemyShips");
     }
 
     protected static Status checkGameEnds(List<Ship> myFleet, List<Ship> enemyFleet) {

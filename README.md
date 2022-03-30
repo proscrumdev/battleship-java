@@ -44,7 +44,7 @@ env: ‘sh\r’: No such file or directory
 The reason for this is that Windows uses CRLF while Linux (in the Docker Container) uses only CR
 You can solve the issue by cloning the repository with a specific parameter:
 ```bash
-git clone https://github.com/proscrumdev/battleship-java.git  --config core.autocrlf=input
+git clone https://github.com/sharadgarg-roche/battleship-java.git  --config core.autocrlf=input
 ```
 
 # Launching the game
