@@ -1,6 +1,6 @@
 [![Build status](https://dev.azure.com/APS-SD-Stewards/APS-SD/_apis/build/status/proscrumdev.battleship-java-CI)](https://dev.azure.com/APS-SD-Stewards/APS-SD/_build/latest?definitionId=15)
 
-# Battleship Java
+# Brikulníci #battleship
 
 A simple game of Battleship, written in Java.
 
