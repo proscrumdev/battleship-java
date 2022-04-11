@@ -31,7 +31,7 @@ public class Main {
         console.println("                    +---------------___[}-_===_.'____                 /\\");
         console.println("                ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _");
         console.println(" __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7");
-        console.println("|                        Welcome to Battleship                         BB-61/");
+        console.println("|                        Welcome to Brikulnici Battleship                         BB-61/");
         console.println(" \\_________________________________________________________________________|");
         console.println("");
         console.setForegroundColor(Ansi.FColor.WHITE);
