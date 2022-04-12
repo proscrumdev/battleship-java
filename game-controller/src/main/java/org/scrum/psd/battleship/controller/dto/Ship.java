@@ -38,10 +38,15 @@ public class Ship {
             positions = new ArrayList<>();
         }
 
-        Letter letter = Letter.valueOf(input.toUpperCase().substring(0, 1));
-        int number = Integer.parseInt(input.substring(1));
+        try {
+            Letter letter = Letter.valueOf(input.toUpperCase().substring(0, 1));
+            int number = Integer.parseInt(input.substring(1));
+            positions.add(new Position(letter, number));
+        } catch (NumberFormatException nfe) {
+            System.out.println("Enter position with letter and number!");
+        }
 
-        positions.add(new Position(letter, number));
+
     }
 
     // TODO: property change listener implementieren
