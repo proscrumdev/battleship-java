@@ -31,13 +31,18 @@ public class GameController {
         return false;
     }
 
-    public static List<Ship> initializeShips() {
-        return Arrays.asList(
-//                new Ship("Aircraft Carrier", 5, Color.CADET_BLUE),
-//                new Ship("Battleship", 4, Color.RED),
-//                new Ship("Submarine", 3, Color.CHARTREUSE),
-//                new Ship("Destroyer", 3, Color.YELLOW),
-                new Ship("Patrol Boat", 2, Color.ORANGE));
+    public static List<Ship> initializeShips(boolean isMock) {
+        if (isMock) {
+            return Arrays.asList(
+                    new Ship("Patrol Boat", 2, Color.ORANGE));
+        }else{
+            return Arrays.asList(
+                    new Ship("Aircraft Carrier", 5, Color.CADET_BLUE),
+                    new Ship("Battleship", 4, Color.RED),
+                    new Ship("Submarine", 3, Color.CHARTREUSE),
+                    new Ship("Destroyer", 3, Color.YELLOW),
+                    new Ship("Patrol Boat", 2, Color.ORANGE));
+        }
     }
 
     public static boolean isShipValid(Ship ship) {
