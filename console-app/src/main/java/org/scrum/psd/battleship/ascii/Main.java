@@ -57,9 +57,7 @@ public class Main {
                 hitPrint();
             }
             separatorPrint();
-            console.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.println(isHit ? "Yeah ! Nice hit !" : "You missed ;( ");
-            console.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             separatorPrint();
             console.setForegroundColor(Ansi.FColor.WHITE);
             position = getRandomPosition();
@@ -68,12 +66,13 @@ public class Main {
             if (isHit) console.setForegroundColor(Ansi.FColor.RED);
             else console.setForegroundColor(Ansi.FColor.BLUE);
             console.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
-            separatorPrint();
 
             if (isHit) {
                 beep();
                 hitPrint();
+
             }
+            separatorPrint();
             console.setForegroundColor(Ansi.FColor.WHITE);
         } while (true);
     }
@@ -111,6 +110,7 @@ public class Main {
         console.println("                 -\\  \\     /  /-");
         console.println("                   \\  \\   /  /");
     }
+
 
     private static void separatorPrint() {
         console.println("----------------------------------------");
