@@ -57,10 +57,12 @@ public class Main {
             }
             separatorPrint();
             console.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+            separatorPrint();
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
             console.println("");
             console.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
+            separatorPrint();
             if (isHit) {
                 beep();
                 hitPrint();
@@ -85,7 +87,7 @@ public class Main {
     private static void playersTurnPrint() {
         console.println("");
         console.println("Player, it's your turn");
-        console.println("Enter coordinates for your shot :");
+        console.println("-=ACTION=-: Enter coordinates for your shot :");
         separatorPrint();
     }
 
