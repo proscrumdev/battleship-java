@@ -44,7 +44,32 @@ public class Main {
 
     private static void StartGame() {
         Scanner scanner = new Scanner(System.in);
+        startPrint();
+        do {
+            playersTurnPrint();
+            Position position = parsePosition(scanner.next());
+            boolean isHit = GameController.checkIsHit(enemyFleet, position);
+            if (isHit) console.setForegroundColor(Ansi.FColor.RED);
+            else console.setForegroundColor(Ansi.FColor.BLUE);
+            if (isHit) {
+                beep();
+                hitPrint();
+            }
+            console.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+            separatorPrint();
+            position = getRandomPosition();
+            isHit = GameController.checkIsHit(myFleet, position);
+            console.println("");
+            console.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
+            if (isHit) {
+                beep();
+                hitPrint();
+            }
+            separatorPrint();
+        } while (true);
+    }
 
+    private static void startPrint() {
         console.print("\033[2J\033[;H");
         console.println("                  __");
         console.println("                 /  \\");
@@ -56,47 +81,27 @@ public class Main {
         console.println("  |     /_\'");
         console.println("   \\    \\_/");
         console.println("    \" \"\" \"\" \"\" \"");
+    }
 
-        do {
-            console.println("");
-            console.println("Player, it's your turn");
-            console.println("Enter coordinates for your shot :");
-            Position position = parsePosition(scanner.next());
-            boolean isHit = GameController.checkIsHit(enemyFleet, position);
-            if (isHit) {
-                beep();
-                console.setForegroundColor(Ansi.FColor.RED);
-                console.println("                \\         .  ./");
-                console.println("              \\      .:\" \";'.:..\" \"   /");
-                console.println("                  (M^^.^~~:.'\" \").");
-                console.println("            -   (/  .    . . \\ \\)  -");
-                console.println("               ((| :. ~ ^  :. .|))");
-                console.println("            -   (\\- |  \\ /  |  /)  -");
-                console.println("                 -\\  \\     /  /-");
-                console.println("                   \\  \\   /  /");
-            }
+    private static void playersTurnPrint() {
+        console.println("");
+        console.println("Player, it's your turn");
+        console.println("Enter coordinates for your shot :");
+    }
 
-            if (isHit) console.setForegroundColor(Ansi.FColor.RED);
-            else console.setForegroundColor(Ansi.FColor.BLUE);
-            console.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+    private static void hitPrint() {
+        console.println("                \\         .  ./");
+        console.println("              \\      .:\" \";'.:..\" \"   /");
+        console.println("                  (M^^.^~~:.'\" \").");
+        console.println("            -   (/  .    . . \\ \\)  -");
+        console.println("               ((| :. ~ ^  :. .|))");
+        console.println("            -   (\\- |  \\ /  |  /)  -");
+        console.println("                 -\\  \\     /  /-");
+        console.println("                   \\  \\   /  /");
+    }
 
-            position = getRandomPosition();
-            isHit = GameController.checkIsHit(myFleet, position);
-            console.println("");
-            console.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
-            if (isHit) {
-                beep();
-                console.println("                \\         .  ./");
-                console.println("              \\      .:\" \";'.:..\" \"   /");
-                console.println("                  (M^^.^~~:.'\" \").");
-                console.println("            -   (/  .    . . \\ \\)  -");
-                console.println("               ((| :. ~ ^  :. .|))");
-                console.println("            -   (\\- |  \\ /  |  /)  -");
-                console.println("                 -\\  \\     /  /-");
-                console.println("                   \\  \\   /  /");
-
-            }
-        } while (true);
+    private static void separatorPrint() {
+        console.println("----------------------------------------");
     }
 
     private static void beep() {
