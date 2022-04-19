@@ -3,6 +3,7 @@ package org.scrum.psd.battleship.controller.dto;
 public class Position {
     private Letter column;
     private int row;
+    public boolean isHit = false;
 
     public Position() {
         super();

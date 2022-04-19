@@ -9,6 +9,7 @@ public class Ship {
     private int size;
     private List<Position> positions;
     private Color color;
+    public boolean isDestroyed = false;
 
     public Ship() {
         this.positions = new ArrayList<>();
@@ -42,6 +43,25 @@ public class Ship {
         int number = Integer.parseInt(input.substring(1));
 
         positions.add(new Position(letter, number));
+    }
+
+    public boolean isDestroyed() {
+        if(isDestroyed) {
+            return true;
+        }
+        boolean allHit = true;
+        for (Position position : positions
+             ) {
+            if (!position.isHit) {
+                allHit = false;
+                break;
+            }
+        }
+
+        if (allHit) {
+            isDestroyed = true;
+        }
+        return isDestroyed;
     }
 
     // TODO: property change listener implementieren
