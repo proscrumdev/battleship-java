@@ -1,7 +1,7 @@
 package org.scrum.psd.battleship.ascii;
 
-import com.diogonunes.jcdp.color.ColoredPrinter;
-import com.diogonunes.jcdp.color.api.Ansi;
+import com.diogonunes.jcolor.AnsiFormat;
+import com.diogonunes.jcolor.Attribute;
 import org.scrum.psd.battleship.controller.GameController;
 import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
@@ -11,30 +11,28 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import static com.diogonunes.jcolor.Ansi.colorize;
+import static com.diogonunes.jcolor.Attribute.*;
+
 public class Main {
     private static List<Ship> myFleet;
     private static List<Ship> enemyFleet;
-    private static ColoredPrinter console;
 
     public static void main(String[] args) {
-        console = new ColoredPrinter.Builder(1, false).background(Ansi.BColor.BLACK).foreground(Ansi.FColor.WHITE).build();
-
-        console.setForegroundColor(Ansi.FColor.MAGENTA);
-        console.println("                                     |__");
-        console.println("                                     |\\/");
-        console.println("                                     ---");
-        console.println("                                     / | [");
-        console.println("                              !      | |||");
-        console.println("                            _/|     _/|-++'");
-        console.println("                        +  +--|    |--|--|_ |-");
-        console.println("                     { /|__|  |/\\__|  |--- |||__/");
-        console.println("                    +---------------___[}-_===_.'____                 /\\");
-        console.println("                ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _");
-        console.println(" __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7");
-        console.println("|                        Welcome to Battleship                         BB-61/");
-        console.println(" \\_________________________________________________________________________|");
-        console.println("");
-        console.setForegroundColor(Ansi.FColor.WHITE);
+        System.out.println(colorize("                                     |__", MAGENTA_TEXT()));
+        System.out.println(colorize("                                     |\\/", MAGENTA_TEXT()));
+        System.out.println(colorize("                                     ---", MAGENTA_TEXT()));
+        System.out.println(colorize("                                     / | [", MAGENTA_TEXT()));
+        System.out.println(colorize("                              !      | |||", MAGENTA_TEXT()));
+        System.out.println(colorize("                            _/|     _/|-++'", MAGENTA_TEXT()));
+        System.out.println(colorize("                        +  +--|    |--|--|_ |-", MAGENTA_TEXT()));
+        System.out.println(colorize("                     { /|__|  |/\\__|  |--- |||__/", MAGENTA_TEXT()));
+        System.out.println(colorize("                    +---------------___[}-_===_.'____                 /\\", MAGENTA_TEXT()));
+        System.out.println(colorize("                ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _", MAGENTA_TEXT()));
+        System.out.println(colorize(" __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7", MAGENTA_TEXT()));
+        System.out.println(colorize("|                        Welcome to Battleship                         BB-61/", MAGENTA_TEXT()));
+        System.out.println(colorize(" \\_________________________________________________________________________|", MAGENTA_TEXT()));
+        System.out.println("");
 
         InitializeGame();
 
@@ -44,61 +42,61 @@ public class Main {
     private static void StartGame() {
         Scanner scanner = new Scanner(System.in);
 
-        console.print("\033[2J\033[;H");
-        console.println("                  __");
-        console.println("                 /  \\");
-        console.println("           .-.  |    |");
-        console.println("   *    _.-'  \\  \\__/");
-        console.println("    \\.-'       \\");
-        console.println("   /          _/");
-        console.println("  |      _  /\" \"");
-        console.println("  |     /_\'");
-        console.println("   \\    \\_/");
-        console.println("    \" \"\" \"\" \"\" \"");
+        System.out.print("\033[2J\033[;H");
+        System.out.println("                  __");
+        System.out.println("                 /  \\");
+        System.out.println("           .-.  |    |");
+        System.out.println("   *    _.-'  \\  \\__/");
+        System.out.println("    \\.-'       \\");
+        System.out.println("   /          _/");
+        System.out.println("  |      _  /\" \"");
+        System.out.println("  |     /_\'");
+        System.out.println("   \\    \\_/");
+        System.out.println("    \" \"\" \"\" \"\" \"");
 
         do {
-            console.println("");
-            console.println("Player, it's your turn");
-            console.println("Enter coordinates for your shot :");
+            System.out.println("");
+            System.out.println("Player, it's your turn");
+            System.out.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             if (isHit) {
                 beep();
 
-                console.println("                \\         .  ./");
-                console.println("              \\      .:\" \";'.:..\" \"   /");
-                console.println("                  (M^^.^~~:.'\" \").");
-                console.println("            -   (/  .    . . \\ \\)  -");
-                console.println("               ((| :. ~ ^  :. .|))");
-                console.println("            -   (\\- |  \\ /  |  /)  -");
-                console.println("                 -\\  \\     /  /-");
-                console.println("                   \\  \\   /  /");
+                System.out.println("                \\         .  ./");
+                System.out.println("              \\      .:\" \";'.:..\" \"   /");
+                System.out.println("                  (M^^.^~~:.'\" \").");
+                System.out.println("            -   (/  .    . . \\ \\)  -");
+                System.out.println("               ((| :. ~ ^  :. .|))");
+                System.out.println("            -   (\\- |  \\ /  |  /)  -");
+                System.out.println("                 -\\  \\     /  /-");
+                System.out.println("                   \\  \\   /  /");
             }
 
-            console.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+            System.out.println(isHit ? "Yeah ! Nice hit !" : "Miss");
 
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
-            console.println("");
-            console.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
+            System.out.println("");
+            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
             if (isHit) {
                 beep();
 
-                console.println("                \\         .  ./");
-                console.println("              \\      .:\" \";'.:..\" \"   /");
-                console.println("                  (M^^.^~~:.'\" \").");
-                console.println("            -   (/  .    . . \\ \\)  -");
-                console.println("               ((| :. ~ ^  :. .|))");
-                console.println("            -   (\\- |  \\ /  |  /)  -");
-                console.println("                 -\\  \\     /  /-");
-                console.println("                   \\  \\   /  /");
+                System.out.println("                \\         .  ./");
+                System.out.println("              \\      .:\" \";'.:..\" \"   /");
+                System.out.println("                  (M^^.^~~:.'\" \").");
+                System.out.println("            -   (/  .    . . \\ \\)  -");
+                System.out.println("               ((| :. ~ ^  :. .|))");
+                System.out.println("            -   (\\- |  \\ /  |  /)  -");
+                System.out.println("                 -\\  \\     /  /-");
+                System.out.println("                   \\  \\   /  /");
 
             }
         } while (true);
     }
 
     private static void beep() {
-        console.print("\007");
+        System.out.print("\007");
     }
 
     protected static Position parsePosition(String input) {
@@ -127,13 +125,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         myFleet = GameController.initializeShips();
 
-        console.println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
+        System.out.println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
 
         for (Ship ship : myFleet) {
-            console.println("");
-            console.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
+            System.out.println("");
+            System.out.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
             for (int i = 1; i <= ship.getSize(); i++) {
-                console.println(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()));
+                System.out.println(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()));
 
                 String positionInput = scanner.next();
                 ship.addPosition(positionInput);

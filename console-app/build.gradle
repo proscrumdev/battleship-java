@@ -2,7 +2,7 @@ apply plugin: 'application'
 
 dependencies {
     implementation project(':game-controller')
-    implementation 'com.diogonunes:JCDP:4.0.2'
+    implementation 'com.diogonunes:JColor:5.3.1'
 
     testImplementation 'com.github.stefanbirkner:system-rules:1.19.0'
 }
