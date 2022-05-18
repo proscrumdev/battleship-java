@@ -44,4 +44,6 @@ public class Position {
 
         return false;
     }
+
+    @Override public String toString() { return getColumn().toString() + String.valueOf(getRow()); } 
 }
