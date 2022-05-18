@@ -55,14 +55,14 @@ public class Main {
         System.out.println("    \" \"\" \"\" \"\" \"");
 
         do {
-            System.out.println("");
             System.out.println("Player, it's your turn");
-            System.out.println("Enter coordinates for your shot :");
+            System.out.println("Enter coordinates for your shot:");
             Position position = parsePosition(scanner.next());
+            System.out.println(position);
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             if (isHit) {
                 beep();
-
+/*
                 System.out.println("                \\         .  ./");
                 System.out.println("              \\      .:\" \";'.:..\" \"   /");
                 System.out.println("                  (M^^.^~~:.'\" \").");
@@ -71,17 +71,18 @@ public class Main {
                 System.out.println("            -   (\\- |  \\ /  |  /)  -");
                 System.out.println("                 -\\  \\     /  /-");
                 System.out.println("                   \\  \\   /  /");
+*/
             }
 
-            System.out.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+            System.out.println(isHit ? colorize("Yeah ! Nice hit !", RED_TEXT()) : colorize("Miss!", BLUE_TEXT()));
 
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
-            System.out.println("");
-            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
+            System.out.println("-------------------------------------------------------------------------");
+            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? colorize("hit your ship !", RED_TEXT()) : colorize("Miss!", BLUE_TEXT())));
             if (isHit) {
                 beep();
-
+/*
                 System.out.println("                \\         .  ./");
                 System.out.println("              \\      .:\" \";'.:..\" \"   /");
                 System.out.println("                  (M^^.^~~:.'\" \").");
@@ -90,8 +91,9 @@ public class Main {
                 System.out.println("            -   (\\- |  \\ /  |  /)  -");
                 System.out.println("                 -\\  \\     /  /-");
                 System.out.println("                   \\  \\   /  /");
-
+*/
             }
+            System.out.println("-------------------------------------------------------------------------");
         } while (true);
     }
 
@@ -132,9 +134,9 @@ public class Main {
             System.out.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
             for (int i = 1; i <= ship.getSize(); i++) {
                 System.out.println(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()));
-
                 String positionInput = scanner.next();
                 ship.addPosition(positionInput);
+                System.out.println(positionInput);
             }
         }
     }
