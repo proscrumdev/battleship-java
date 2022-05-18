@@ -58,7 +58,12 @@ public class Main {
             System.out.println("");
             System.out.println("Player, it's your turn");
             System.out.println("Enter coordinates for your shot :");
-            Position position = parsePosition(scanner.next());
+            String input = scanner.next();
+            while (!Position.validatePosition(input)) {
+                System.out.println("Enter coordinates for your shot :");
+                input = scanner.next();
+            }
+            Position position = parsePosition(input);
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             if (isHit) {
                 beep();
@@ -134,6 +139,10 @@ public class Main {
                 System.out.println(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()));
 
                 String positionInput = scanner.next();
+                while (!Position.validatePosition(positionInput)) {
+                    System.out.println(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()));
+                    positionInput = scanner.next();
+                }
                 ship.addPosition(positionInput);
             }
         }
