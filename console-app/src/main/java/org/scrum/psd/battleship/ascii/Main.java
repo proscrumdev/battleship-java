@@ -54,8 +54,10 @@ public class Main {
         System.out.println("   \\    \\_/");
         System.out.println("    \" \"\" \"\" \"\" \"");
 
+        int i = 1;
         do {
             System.out.println("");
+            System.out.printf("------- Round %d --------" + System.lineSeparator(), i);
             System.out.println("Player, it's your turn");
             System.out.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
@@ -73,12 +75,12 @@ public class Main {
                 System.out.println("                   \\  \\   /  /");
             }
 
-            System.out.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+            System.out.println(isHit ? colorize("Yeah ! Nice hit !", YELLOW_TEXT()) : colorize("Miss", BLUE_TEXT()));
 
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
             System.out.println("");
-            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
+            System.out.println(String.format(colorize("Computer shoot in %s%s and %s", CYAN_TEXT()), position.getColumn(), position.getRow(), isHit ? colorize("hit your ship !", YELLOW_TEXT()) : colorize("miss", BLUE_TEXT())));
             if (isHit) {
                 beep();
 
@@ -92,6 +94,7 @@ public class Main {
                 System.out.println("                   \\  \\   /  /");
 
             }
+            i++;
         } while (true);
     }
 
