@@ -43,6 +43,7 @@
     <plugin>
       <artifactId>maven-assembly-plugin</artifactId>
       <configuration>
+      	<finalName>battleship</finalName>
         <archive>
           <manifest>
             <mainClass>org.scrum.psd.battleship.ascii.Main</mainClass>
@@ -51,6 +52,7 @@
         <descriptorRefs>
           <descriptorRef>jar-with-dependencies</descriptorRef>
         </descriptorRefs>
+        <appendAssemblyId>false</appendAssemblyId>
       </configuration>
       <executions>
         <execution>
