@@ -33,7 +33,7 @@ public class Position {
         boolean valid = validNumber && Letter.isValid(letterStr);
 
         if (!valid) {
-            System.out.println("Wrong input!");
+            System.out.println("Wrong input! Please enter values from A-H and 1-8.");
         }
         
         return valid;
