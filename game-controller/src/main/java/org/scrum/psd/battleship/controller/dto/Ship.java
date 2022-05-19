@@ -44,6 +44,20 @@ public class Ship {
         positions.add(new Position(letter, number));
     }
 
+    public Boolean isSunk() {
+        Boolean flag = Boolean.TRUE;
+
+        Position pos = positions
+                .stream()
+                .filter(e -> e.getHitPosition().equals(Boolean.FALSE))
+                .findAny()
+                .orElse(null);
+
+        if(pos!=null) flag = pos.getHitPosition();
+
+        return flag;
+    }
+
     // TODO: property change listener implementieren
 
     public boolean isPlaced() {
@@ -70,7 +84,7 @@ public class Ship {
         this.positions = positions;
     }
 
-    public Color getColor() {
+     public Color getColor() {
         return color;
     }
 

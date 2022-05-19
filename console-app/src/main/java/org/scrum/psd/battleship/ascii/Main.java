@@ -94,6 +94,17 @@ public class Main {
                 System.out.println("                   \\  \\   /  /");
 
             }
+
+            Ship notSunkEnemyShip =
+            enemyFleet
+                    .stream()
+                    .filter(e -> e.isSunk().equals(Boolean.FALSE))
+                    .findAny()
+                    .orElse(null);
+
+            if( notSunkEnemyShip == null)
+                System.out.println(colorize("ALL ENEMY FLEET LOST !", RED_TEXT()));
+
             i++;
         } while (true);
     }
