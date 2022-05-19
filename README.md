@@ -57,3 +57,19 @@ git clone https://github.com/proscrumdev/battleship-java.git  --config core.auto
 ```
 ./gradlew test
 ```
+
+# Instrukcja uruchamiania
+
+https://github.com/miechu0x29A/battleship-java-apsd-2022/actions/workflows/maven.yml?query=branch%3Amaster -> klikamy najwyższy pipeline zakończony sukcesem
+
+![img.png](img.png)
+
+Pobieramy package:
+
+![img_1.png](img_1.png)
+
+Rozpakowujemy ZIP i uruchamiamy w konsoli:
+
+```
+java -jar .\application-jar-with-dependencies.jar
+```
