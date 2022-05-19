@@ -15,23 +15,29 @@ import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
 
 public class Main {
+    private static final Attribute SHIP_COLOR = MAGENTA_TEXT();
+    private static final Attribute MESSAGE_COLOR = YELLOW_TEXT();
+    
+    private static final Attribute MISS_COLOR = BLUE_TEXT();
+    private static final Attribute HIT_COLOR = RED_TEXT();
+    
     private static List<Ship> myFleet;
     private static List<Ship> enemyFleet;
 
     public static void main(String[] args) {
-        System.out.println(colorize("                                     |__", MAGENTA_TEXT()));
-        System.out.println(colorize("                                     |\\/", MAGENTA_TEXT()));
-        System.out.println(colorize("                                     ---", MAGENTA_TEXT()));
-        System.out.println(colorize("                                     / | [", MAGENTA_TEXT()));
-        System.out.println(colorize("                              !      | |||", MAGENTA_TEXT()));
-        System.out.println(colorize("                            _/|     _/|-++'", MAGENTA_TEXT()));
-        System.out.println(colorize("                        +  +--|    |--|--|_ |-", MAGENTA_TEXT()));
-        System.out.println(colorize("                     { /|__|  |/\\__|  |--- |||__/", MAGENTA_TEXT()));
-        System.out.println(colorize("                    +---------------___[}-_===_.'____                 /\\", MAGENTA_TEXT()));
-        System.out.println(colorize("                ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _", MAGENTA_TEXT()));
-        System.out.println(colorize(" __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7", MAGENTA_TEXT()));
-        System.out.println(colorize("|                        Welcome to Battleship                         BB-61/", MAGENTA_TEXT()));
-        System.out.println(colorize(" \\_________________________________________________________________________|", MAGENTA_TEXT()));
+        System.out.println(colorize("                                     |__", SHIP_COLOR));
+        System.out.println(colorize("                                     |\\/", SHIP_COLOR));
+        System.out.println(colorize("                                     ---", SHIP_COLOR));
+        System.out.println(colorize("                                     / | [", SHIP_COLOR));
+        System.out.println(colorize("                              !      | |||", SHIP_COLOR));
+        System.out.println(colorize("                            _/|     _/|-++'", SHIP_COLOR));
+        System.out.println(colorize("                        +  +--|    |--|--|_ |-", SHIP_COLOR));
+        System.out.println(colorize("                     { /|__|  |/\\__|  |--- |||__/", SHIP_COLOR));
+        System.out.println(colorize("                    +---------------___[}-_===_.'____                 /\\", SHIP_COLOR));
+        System.out.println(colorize("                ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _", SHIP_COLOR));
+        System.out.println(colorize(" __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7", SHIP_COLOR));
+        System.out.println(colorize("|                        Welcome to Battleship                         BB-61/", SHIP_COLOR));
+        System.out.println(colorize(" \\_________________________________________________________________________|", SHIP_COLOR));
         System.out.println("");
 
         InitializeGame();
@@ -56,10 +62,10 @@ public class Main {
 
         do {
             System.out.println("Player, it's your turn");
-            System.out.println(colorize("Enter coordinates for your shot:", YELLOW_TEXT()));
+            System.out.println(colorize("Enter coordinates for your shot:", MESSAGE_COLOR));
             String input = scanner.next();
             while (!Position.validatePosition(input)) {
-                System.out.println(colorize("Enter coordinates for your shot:", YELLOW_TEXT()));
+                System.out.println(colorize("Enter coordinates for your shot:", MESSAGE_COLOR));
                 input = scanner.next();
             }
             Position position = parsePosition(input);
@@ -79,12 +85,12 @@ public class Main {
 
             }
 
-            System.out.println(isHit ? colorize("Yeah ! Nice hit !", RED_TEXT()) : colorize("Miss!", BLUE_TEXT()));
+            System.out.println(isHit ? colorize("Yeah ! Nice hit !", HIT_COLOR) : colorize("Miss!", MISS_COLOR));
 
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
             System.out.println("-------------------------------------------------------------------------");
-            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? colorize("hit your ship !", RED_TEXT()) : colorize("Miss!", BLUE_TEXT())));
+            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? colorize("hit your ship !", HIT_COLOR) : colorize("Miss!", MISS_COLOR)));
             if (isHit) {
                 beep();
 
@@ -138,11 +144,11 @@ public class Main {
             System.out.println("");
             System.out.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
             for (int i = 1; i <= ship.getSize(); i++) {
-                System.out.println(colorize(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()), YELLOW_TEXT()));
+                System.out.println(colorize(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()), MESSAGE_COLOR));
 
                 String positionInput = scanner.next();
                 while (!Position.validatePosition(positionInput)) {
-                    System.out.println(colorize(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()), YELLOW_TEXT()));
+                    System.out.println(colorize(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()), MESSAGE_COLOR));
 
                     positionInput = scanner.next();
                 }
