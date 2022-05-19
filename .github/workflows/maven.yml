@@ -24,9 +24,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-    - run: mvn clean compile assembly:single
+      run: mvn clean compile assembly:single
     - name: publish artifact
-    - run: mkdir staging && cp console-app/target/*.jar staging
+      run: mkdir staging && cp console-app/target/*.jar staging
     - uses: actions/upload-artifact@v3
       with:
         name: Package
