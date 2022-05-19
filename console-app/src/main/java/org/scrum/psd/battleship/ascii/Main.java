@@ -102,9 +102,6 @@ public class Main {
                     .findAny()
                     .orElse(null);
 
-            if( notSunkEnemyShip == null)
-                System.out.println(colorize("ALL ENEMY FLEET LOST !", RED_TEXT()));
-
             i++;
         } while (true);
     }
