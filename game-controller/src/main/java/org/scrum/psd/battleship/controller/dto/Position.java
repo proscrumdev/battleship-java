@@ -4,6 +4,7 @@ public class Position {
     private Letter column;
     private int row;
 
+    private Boolean hitPosition = Boolean.FALSE;
     public Position() {
         super();
     }
@@ -29,6 +30,14 @@ public class Position {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    public Boolean getHitPosition() {
+        return hitPosition;
+    }
+
+    public void setHitPosition(Boolean hitPosition) {
+        this.hitPosition = hitPosition;
     }
 
     @Override public boolean equals(Object o) {

@@ -94,6 +94,14 @@ public class Main {
                 System.out.println("                   \\  \\   /  /");
 
             }
+
+            Ship notSunkEnemyShip =
+            enemyFleet
+                    .stream()
+                    .filter(e -> e.isSunk().equals(Boolean.FALSE))
+                    .findAny()
+                    .orElse(null);
+
             i++;
         } while (true);
     }
