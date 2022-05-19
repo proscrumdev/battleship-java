@@ -7,4 +7,5 @@
   - game.sh
 
 ### To start game run in terminal:
+chmod 755 game.sh
 ./game.sh
