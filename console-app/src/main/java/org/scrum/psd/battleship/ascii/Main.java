@@ -145,26 +145,132 @@ public class Main {
     private static void InitializeEnemyFleet() {
         enemyFleet = GameController.initializeShips();
 
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 4));
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 5));
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 6));
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 7));
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 8));
+        int version = getRandomNumber(0, 4);
 
-        enemyFleet.get(1).getPositions().add(new Position(Letter.E, 6));
-        enemyFleet.get(1).getPositions().add(new Position(Letter.E, 7));
-        enemyFleet.get(1).getPositions().add(new Position(Letter.E, 8));
-        enemyFleet.get(1).getPositions().add(new Position(Letter.E, 9));
+        switch (version) {
+        case 0:
+            enemyFleet.get(0).getPositions().add(new Position(Letter.B, 4));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.B, 5));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.B, 6));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.B, 7));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.B, 8));
 
-        enemyFleet.get(2).getPositions().add(new Position(Letter.A, 3));
-        enemyFleet.get(2).getPositions().add(new Position(Letter.B, 3));
-        enemyFleet.get(2).getPositions().add(new Position(Letter.C, 3));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.E, 5));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.E, 6));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.E, 7));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.E, 8));
 
-        enemyFleet.get(3).getPositions().add(new Position(Letter.F, 8));
-        enemyFleet.get(3).getPositions().add(new Position(Letter.G, 8));
-        enemyFleet.get(3).getPositions().add(new Position(Letter.H, 8));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.A, 3));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.B, 3));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.C, 3));
 
-        enemyFleet.get(4).getPositions().add(new Position(Letter.C, 5));
-        enemyFleet.get(4).getPositions().add(new Position(Letter.C, 6));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.F, 8));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.G, 8));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.H, 8));
+
+            enemyFleet.get(4).getPositions().add(new Position(Letter.C, 5));
+            enemyFleet.get(4).getPositions().add(new Position(Letter.C, 6));
+            break;
+
+        case 1:
+            enemyFleet.get(0).getPositions().add(new Position(Letter.C, 5));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.D, 5));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.E, 5));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.F, 5));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.G, 5));
+
+            enemyFleet.get(1).getPositions().add(new Position(Letter.B, 1));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.B, 2));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.B, 3));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.B, 4));
+
+            enemyFleet.get(2).getPositions().add(new Position(Letter.B, 7));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.C, 7));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.D, 7));
+
+            enemyFleet.get(3).getPositions().add(new Position(Letter.F, 1));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.F, 2));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.F, 3));
+
+            enemyFleet.get(4).getPositions().add(new Position(Letter.D, 2));
+            enemyFleet.get(4).getPositions().add(new Position(Letter.D, 3));
+            break;
+
+        case 2:
+            enemyFleet.get(0).getPositions().add(new Position(Letter.A, 2));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.A, 3));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.A, 4));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.A, 5));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.A, 6));
+
+            enemyFleet.get(1).getPositions().add(new Position(Letter.G, 4));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.G, 5));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.G, 6));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.G, 7));
+
+            enemyFleet.get(2).getPositions().add(new Position(Letter.B, 3));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.C, 3));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.D, 3));
+
+            enemyFleet.get(3).getPositions().add(new Position(Letter.F, 8));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.G, 8));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.H, 8));
+
+            enemyFleet.get(4).getPositions().add(new Position(Letter.C, 5));
+            enemyFleet.get(4).getPositions().add(new Position(Letter.C, 6));
+            break;
+
+        case 3:
+            enemyFleet.get(0).getPositions().add(new Position(Letter.H, 2));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.H, 3));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.H, 4));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.H, 5));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.H, 6));
+
+            enemyFleet.get(1).getPositions().add(new Position(Letter.E, 8));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.F, 8));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.G, 8));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.H, 8));
+
+            enemyFleet.get(2).getPositions().add(new Position(Letter.A, 8));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.B, 8));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.C, 8));
+
+            enemyFleet.get(3).getPositions().add(new Position(Letter.A, 4));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.A, 5));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.A, 6));
+
+            enemyFleet.get(4).getPositions().add(new Position(Letter.D, 1));
+            enemyFleet.get(4).getPositions().add(new Position(Letter.E, 1));
+            break;
+
+        case 4:
+            enemyFleet.get(0).getPositions().add(new Position(Letter.D, 2));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.D, 3));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.D, 4));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.D, 5));
+            enemyFleet.get(0).getPositions().add(new Position(Letter.D, 6));
+
+            enemyFleet.get(1).getPositions().add(new Position(Letter.G, 3));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.G, 4));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.G, 5));
+            enemyFleet.get(1).getPositions().add(new Position(Letter.G, 6));
+
+            enemyFleet.get(2).getPositions().add(new Position(Letter.B, 3));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.C, 3));
+            enemyFleet.get(2).getPositions().add(new Position(Letter.D, 3));
+
+            enemyFleet.get(3).getPositions().add(new Position(Letter.F, 8));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.G, 8));
+            enemyFleet.get(3).getPositions().add(new Position(Letter.H, 8));
+
+            enemyFleet.get(4).getPositions().add(new Position(Letter.C, 5));
+            enemyFleet.get(4).getPositions().add(new Position(Letter.C, 6));
+            break;
+        }
+    }
+
+    private static int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 }
