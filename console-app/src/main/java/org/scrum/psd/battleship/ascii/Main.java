@@ -16,6 +16,8 @@ import static com.diogonunes.jcolor.Attribute.*;
 
 public class Main {
     private static final Attribute SHIP_COLOR = MAGENTA_TEXT();
+    private static final Attribute MESSAGE_COLOR = YELLOW_TEXT();
+    
     private static final Attribute MISS_COLOR = BLUE_TEXT();
     private static final Attribute HIT_COLOR = RED_TEXT();
     
@@ -60,10 +62,10 @@ public class Main {
 
         do {
             System.out.println("Player, it's your turn");
-            System.out.println(colorize("Enter coordinates for your shot:", YELLOW_TEXT()));
+            System.out.println(colorize("Enter coordinates for your shot:", MESSAGE_COLOR));
             String input = scanner.next();
             while (!Position.validatePosition(input)) {
-                System.out.println(colorize("Enter coordinates for your shot:", YELLOW_TEXT()));
+                System.out.println(colorize("Enter coordinates for your shot:", MESSAGE_COLOR));
                 input = scanner.next();
             }
             Position position = parsePosition(input);
@@ -142,11 +144,11 @@ public class Main {
             System.out.println("");
             System.out.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
             for (int i = 1; i <= ship.getSize(); i++) {
-                System.out.println(colorize(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()), YELLOW_TEXT()));
+                System.out.println(colorize(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()), MESSAGE_COLOR));
 
                 String positionInput = scanner.next();
                 while (!Position.validatePosition(positionInput)) {
-                    System.out.println(colorize(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()), YELLOW_TEXT()));
+                    System.out.println(colorize(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()), MESSAGE_COLOR));
 
                     positionInput = scanner.next();
                 }
