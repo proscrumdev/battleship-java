@@ -1,4 +1,0 @@
-rootProject.name = 'battleship'
-include 'console-app'
-include 'game-controller'
-
