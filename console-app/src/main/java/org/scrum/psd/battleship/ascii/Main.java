@@ -166,6 +166,8 @@ public class Main {
                 
                 while (!validate(ship, positionInput)) {
                     System.out.println(colorize(String.format("Invalid position"), MESSAGE_COLOR));
+
+                    System.out.println(colorize(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()), MESSAGE_COLOR));
                     positionInput = scanner.next();
                 }
                 
@@ -175,10 +177,15 @@ public class Main {
     }
     
     private static boolean validate(Ship ship, String positionInput) {
+        if (!Position.validatePosition(positionInput)) {
+            return false;
+        }
         Letter letter = Letter.valueOf(positionInput.toUpperCase().substring(0, 1));
         int number = Integer.parseInt(positionInput.substring(1));
         Position pos = new Position(letter, number);
-        
+        if (!Position.validatePosition(positionInput)) {
+
+        }
         for (FleetValidator validator : validators) {
             if (!validator.validate(myFleet, ship, pos)) {
                 return false;
