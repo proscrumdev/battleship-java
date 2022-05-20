@@ -16,6 +16,8 @@ public class Position {
         this.row = row;
     }
 
+
+
     public Letter getColumn() {
         return column;
     }

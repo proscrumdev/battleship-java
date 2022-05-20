@@ -70,6 +70,9 @@ Pobieramy package:
 
 Rozpakowujemy ZIP i uruchamiamy w konsoli:
 
+Pobieramy java -jar .\application-jar-with-dependencies.jar
+Pobieramy terminal https://github.com/cmderdev/cmder/releases/download/v1.3.19/cmder_mini.zip 
+
 ```
 java -jar .\application-jar-with-dependencies.jar
 ```

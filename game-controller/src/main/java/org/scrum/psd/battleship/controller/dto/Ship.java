@@ -99,4 +99,8 @@ public class Ship {
     public void setSize(int size) {
         this.size = size;
     }
+
+    public void addPosition(Position newPosition) {
+        this.positions.add(newPosition);
+    }
 }

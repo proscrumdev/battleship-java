@@ -7,9 +7,7 @@ import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
 import org.scrum.psd.battleship.controller.dto.Ship;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
@@ -136,17 +134,55 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         myFleet = GameController.initializeShips();
 
-        System.out.println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
+        System.out.println(colorize("Please position your fleet (Game board has size from A to H and 1 to 8) :", YELLOW_TEXT()));
 
         for (Ship ship : myFleet) {
             System.out.println("");
-            System.out.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
-            for (int i = 1; i <= ship.getSize(); i++) {
-                System.out.println(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()));
+            System.out.println(String.format(colorize("Please enter the first position for the %s (size: %s)",YELLOW_TEXT()), ship.getName(), ship.getSize()));
+            String firstPositionInput = scanner.next();
+            List<Letter> letters = Arrays.asList(Letter.values());
+            int index = letters.indexOf(ship.getPositions().get(0).getColumn());
+            System.out.println(String.format(colorize("Please enter the direction for the %s (size: %s) U-up, D-down, L-left, R-right",YELLOW_TEXT()), ship.getName(), ship.getSize()));
+            String direction = scanner.next().toUpperCase();
+            ship.addPosition(firstPositionInput);
+            Position newPosition;
+            int row;
+            try {
 
-                String positionInput = scanner.next();
-                ship.addPosition(positionInput);
+                for (int i = 1; i < ship.getSize(); i++) {
+                    switch (direction) {
+                    case "U":
+
+                        row = ship.getPositions().get(0).getRow() - i;
+                        if (row < 1 && row > 8) {throw new ArrayIndexOutOfBoundsException();}
+                            newPosition = new Position(ship.getPositions().get(0).getColumn(), row);
+                            ship.addPosition(newPosition);
+                        break;
+                    case "D":
+                        row = ship.getPositions().get(0).getRow() + i;
+                        if (row < 1 && row > 8) {throw new ArrayIndexOutOfBoundsException();}
+                        newPosition = new Position(ship.getPositions().get(0).getColumn(), ship.getPositions().get(0).getRow() + i);
+                        ship.addPosition(newPosition);
+                        break;
+                    case "L":
+                        newPosition = new Position(letters.get(index - i), ship.getPositions().get(0).getRow());
+                        ship.addPosition(newPosition);
+                        break;
+                    case "R":
+                        newPosition = new Position(letters.get(index + i), ship.getPositions().get(0).getRow());
+                        ship.addPosition(newPosition);
+                        break;
+                    default:
+                        System.out.println();
+                        break;
+                    }
+
+                }
+            }catch (IndexOutOfBoundsException indexOutOfBoundsException){
+                System.out.println(colorize("Bad direction !!!", RED_TEXT()));
             }
+
+            ship.setPlaced(true);
         }
     }
 
