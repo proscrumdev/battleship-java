@@ -9,6 +9,9 @@ public class OverlappValidator implements FleetValidator {
 
     @Override
     public boolean validate(List<Ship> fleet, Ship ship, Position position) {
+<<<<<<< HEAD
+        // TODO Auto-generated method stub
+=======
         for (Ship sh: fleet) {
             for (Position pos: sh.getPositions()) {
                 if (position.equals(pos)) {
@@ -17,6 +20,7 @@ public class OverlappValidator implements FleetValidator {
                 }
             }
         }
+>>>>>>> origin/master
         return true;
     }
 
