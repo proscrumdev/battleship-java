@@ -10,7 +10,7 @@ public class OverlappValidator implements FleetValidator {
     @Override
     public boolean validate(List<Ship> fleet, Ship ship, Position position) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
 }
