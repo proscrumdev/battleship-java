@@ -6,7 +6,11 @@ import org.scrum.psd.battleship.controller.GameController;
 import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
 import org.scrum.psd.battleship.controller.dto.Ship;
+import org.scrum.psd.battleship.validator.FleetValidator;
+import org.scrum.psd.battleship.validator.LineValidator;
+import org.scrum.psd.battleship.validator.OverlappValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -23,6 +27,13 @@ public class Main {
     
     private static List<Ship> myFleet;
     private static List<Ship> enemyFleet;
+    
+    private static List<FleetValidator> validators;
+    static {
+        validators = new ArrayList<>();
+        validators.add(new OverlappValidator());
+        validators.add(new LineValidator());
+    }
 
     public static void main(String[] args) {
         System.out.println(colorize("                                     |__", SHIP_COLOR));
@@ -152,9 +163,29 @@ public class Main {
 
                     positionInput = scanner.next();
                 }
+                
+                while (!validate(ship, positionInput)) {
+                    System.out.println(colorize(String.format("Invalid position"), MESSAGE_COLOR));
+                    positionInput = scanner.next();
+                }
+                
                 ship.addPosition(positionInput);
             }
         }
+    }
+    
+    private static boolean validate(Ship ship, String positionInput) {
+        Letter letter = Letter.valueOf(positionInput.toUpperCase().substring(0, 1));
+        int number = Integer.parseInt(positionInput.substring(1));
+        Position pos = new Position(letter, number);
+        
+        for (FleetValidator validator : validators) {
+            if (!validator.validate(myFleet, ship, pos)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     private static void InitializeEnemyFleet() {
