@@ -3,6 +3,7 @@ apply plugin: 'application'
 dependencies {
     implementation project(':game-controller')
     implementation 'com.diogonunes:JColor:5.3.1'
+    implementation 'com.microsoft.azure:applicationinsights-core:2.6.4'
 
     testImplementation 'com.github.stefanbirkner:system-rules:1.19.0'
 }

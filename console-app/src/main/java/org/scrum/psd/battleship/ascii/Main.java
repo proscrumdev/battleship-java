@@ -1,15 +1,11 @@
 package org.scrum.psd.battleship.ascii;
 
-import com.diogonunes.jcolor.AnsiFormat;
-import com.diogonunes.jcolor.Attribute;
 import org.scrum.psd.battleship.controller.GameController;
 import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
 import org.scrum.psd.battleship.controller.dto.Ship;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
@@ -18,7 +14,10 @@ public class Main {
     private static List<Ship> myFleet;
     private static List<Ship> enemyFleet;
 
+    private static final Telemetry telemetry = new Telemetry();
+
     public static void main(String[] args) {
+        telemetry.trackEvent("ApplicationStarted", "Technology", "Java");
         System.out.println(colorize("                                     |__", MAGENTA_TEXT()));
         System.out.println(colorize("                                     |\\/", MAGENTA_TEXT()));
         System.out.println(colorize("                                     ---", MAGENTA_TEXT()));
@@ -74,11 +73,13 @@ public class Main {
             }
 
             System.out.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+            telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
 
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
             System.out.println("");
             System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
+            telemetry.trackEvent("Computer_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
             if (isHit) {
                 beep();
 
@@ -135,6 +136,7 @@ public class Main {
 
                 String positionInput = scanner.next();
                 ship.addPosition(positionInput);
+                telemetry.trackEvent("Player_PlaceShipPosition", "Position", positionInput, "Ship", ship.getName(), "PositionInShip", Integer.valueOf(i).toString());
             }
         }
     }
