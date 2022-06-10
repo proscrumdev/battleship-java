@@ -2,7 +2,7 @@
 
 # Battleship Java
 
-A simple game of Battleship, written in Java.
+A simple game of Battleship, written in Java. The purpose of this repository is to serve as an entry point into coding exercises and it was especially created for scrum.orgs Applying Professional Scrum for Software Development course (www.scrum.org/apssd). The code in this repository is unfinished by design.
 
 # Getting started
 
