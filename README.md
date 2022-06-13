@@ -14,7 +14,7 @@ options:
 Run battleship with Gradle
 
 ```bash
-./gradlew run
+./gradlew run --console plain
 ```
 
 Execute tests with Gradle
