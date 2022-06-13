@@ -49,7 +49,7 @@ git clone https://github.com/proscrumdev/battleship-java.git  --config core.auto
 # Launching the game
 
 ```bash
-./gradlew run
+./gradlew run --console plain
 ```
 
 # Running the Tests
