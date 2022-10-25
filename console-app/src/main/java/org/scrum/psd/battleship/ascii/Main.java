@@ -16,7 +16,7 @@ public class Main {
 
     private static final Telemetry telemetry = new Telemetry();
 
-    private static final String STEP_SEPARATOR = colorize("-----------------------------------------", GREEN_TEXT());
+    private static final String STEP_SEPARATOR = colorize("-----------------------------------------", MAGENTA_TEXT());
 
     public static void main(String[] args) {
         telemetry.trackEvent("ApplicationStarted", "Technology", "Java");
