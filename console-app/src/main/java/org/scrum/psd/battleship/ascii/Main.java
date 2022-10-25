@@ -63,8 +63,11 @@ public class Main {
             String input = scanner.next();
             if (input.equals("S")) {
                 showSunkShips(enemyFleet);
+            } else
+            if (input.equals("L")) {
                 showLeftOverShips(enemyFleet);
-            } else {
+            }
+            else {
                 Position position = parsePosition(input);
                 boolean isHit = GameController.checkIsHit(enemyFleet, position);
                 if (isHit) {
@@ -107,6 +110,11 @@ public class Main {
     }
 
     private static void showLeftOverShips(Collection<Ship> ships) {
+        for (Ship s : ships) {
+            if (!s.isSunk()) {
+                System.out.println("Left over ship: " + s.getName());
+            }
+        }
     }
 
     private static void showSunkShips(Collection<Ship> ships) {
