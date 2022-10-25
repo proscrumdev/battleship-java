@@ -23,6 +23,7 @@ public class GameController {
         for (Ship ship : ships) {
             for (Position position : ship.getPositions()) {
                 if (position.equals(shot)) {
+                    ship.setHitCount();
                     return true;
                 }
             }

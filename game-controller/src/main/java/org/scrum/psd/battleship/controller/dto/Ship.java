@@ -10,6 +10,8 @@ public class Ship {
     private List<Position> positions;
     private Color color;
 
+    private int hitCount;
+
     public Ship() {
         this.positions = new ArrayList<>();
     }
@@ -84,5 +86,17 @@ public class Ship {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public int getHitCount() {
+        return hitCount;
+    }
+
+    public void setHitCount() {
+        this.hitCount++;
+    }
+
+    public boolean isSunk() {
+        return hitCount >= size;
     }
 }
