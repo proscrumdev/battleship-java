@@ -69,6 +69,16 @@ public class Main {
             }
             else {
                 Position position = parsePosition(input);
+
+                while (position == null || !position.toString().matches("[A-H][1-8]")){
+                    if (position == null){
+                        System.out.println("Invalid position, please enter a valid position (i.e A3):");
+                    } else {
+                        System.out.println("Miss. Position is outside of field. Try again.");
+                        System.out.println("Enter coordinates for your shot :");
+                    }
+                    position = parsePosition(scanner.next());
+                }
                 boolean isHit = GameController.checkIsHit(enemyFleet, position);
                 if (isHit) {
                     beep();
@@ -130,9 +140,14 @@ public class Main {
     }
 
     protected static Position parsePosition(String input) {
-        Letter letter = Letter.valueOf(input.toUpperCase().substring(0, 1));
-        int number = Integer.parseInt(input.substring(1));
-        return new Position(letter, number);
+        try {
+            Letter letter = Letter.valueOf(input.toUpperCase().substring(0, 1));
+            int number = Integer.parseInt(input.substring(1));
+            return new Position(letter, number);
+
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private static Position getRandomPosition() {
@@ -164,6 +179,13 @@ public class Main {
                 System.out.println(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()));
 
                 String positionInput = scanner.next();
+
+                // check if input is valid
+                while (!positionInput.matches("[A-H][1-8]")) {
+                    System.out.println("Invalid position, please enter a valid position (i.e A3):");
+                    positionInput = scanner.next();
+                }
+
                 ship.addPosition(positionInput);
                 telemetry.trackEvent("Player_PlaceShipPosition", "Position", positionInput, "Ship", ship.getName(), "PositionInShip", Integer.valueOf(i).toString());
             }

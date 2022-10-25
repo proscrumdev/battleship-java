@@ -44,4 +44,9 @@ public class Position {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        return this.column.toString() + this.row;
+    }
 }
