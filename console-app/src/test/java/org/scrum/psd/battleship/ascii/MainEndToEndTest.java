@@ -19,7 +19,11 @@ public class MainEndToEndTest {
     @Test
     public void testPlayGameShotHits() {
         try {
-            gameInput.provideLines("a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "d1", "d2", "d3", "e1", "e2", "b4");
+            //initiate
+            gameInput.provideLines("a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "d1", "d2", "d3", "e1", "e2",
+
+                    //gameplay
+                    "b4");
 
             Main.main(new String[]{});
         } catch(NoSuchElementException e) {
@@ -31,7 +35,11 @@ public class MainEndToEndTest {
     @Test
     public void testPlayGameShotMisses() {
         try {
-            gameInput.provideLines("a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "d1", "d2", "d3", "e1", "e2", "e4");
+            //initiate
+            gameInput.provideLines("a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "d1", "d2", "d3", "e1", "e2",
+
+                    //gameplay
+                    "e4");
 
             Main.main(new String[]{});
         } catch(NoSuchElementException e) {
@@ -43,7 +51,11 @@ public class MainEndToEndTest {
     @Test
     public void testPlayGameShowSunkShip() {
         try {
-            gameInput.provideLines("a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "d1", "d2", "d3", "e1", "e2", "c5", "c6", "S");
+            //initiate
+            gameInput.provideLines("a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "d1", "d2", "d3", "e1", "e2",
+
+                    //gameplay
+                    "c5", "c6", "S");
 
             Main.main(new String[]{});
         } catch(NoSuchElementException e) {
@@ -55,7 +67,11 @@ public class MainEndToEndTest {
     @Test
     public void testPlayGameShowLeftOverShips() {
         try {
-            gameInput.provideLines("a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "d1", "d2", "d3", "e1", "e2", "c5", "c6", "L", "S");
+            //initiate
+            gameInput.provideLines("a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "d1", "d2", "d3", "e1", "e2",
+
+                    //gameplay
+                    "c5", "c6", "L", "S");
 
             Main.main(new String[]{});
         } catch(NoSuchElementException e) {
