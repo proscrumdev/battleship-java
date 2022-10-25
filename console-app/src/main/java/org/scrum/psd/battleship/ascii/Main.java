@@ -12,7 +12,7 @@ import static com.diogonunes.jcolor.Attribute.*;
 
 public class Main {
     private static List<Ship> myFleet;
-    private static List<Ship> enemyFleet;
+    protected static List<Ship> enemyFleet;
 
     private static final Telemetry telemetry = new Telemetry();
 
@@ -195,7 +195,7 @@ public class Main {
         }
     }
 
-    private static void InitializeEnemyFleet() {
+    protected static void InitializeEnemyFleet() {
         enemyFleet = GameController.initializeShips();
 
         enemyFleet.get(0).getPositions().add(new Position(Letter.B, 4));
