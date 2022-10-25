@@ -54,15 +54,25 @@ public class Main {
         System.out.println("  |     /_\'");
         System.out.println("   \\    \\_/");
         System.out.println("    \" \"\" \"\" \"\" \"");
+        int hitCounter = 0;
 
         do {
             System.out.println(STEP_SEPARATOR);
             System.out.println("Player, it's your turn");
-            System.out.println("Enter coordinates for your shot :");
-            Position position = parsePosition(scanner.next());
-            boolean isHit = GameController.checkIsHit(enemyFleet, position);
-            if (isHit) {
-                beep();
+            System.out.println("Enter coordinates for your shot or S for show sunk or left over ships:");
+            String input = scanner.next();
+            if (input.equals("S")) {
+                showSunkShips(enemyFleet);
+            } else
+            if (input.equals("L")) {
+                showLeftOverShips(enemyFleet);
+            }
+            else {
+                Position position = parsePosition(input);
+                boolean isHit = GameController.checkIsHit(enemyFleet, position);
+                if (isHit) {
+                    beep();
+                    hitCounter++;
 
                 System.out.println(colorize("                \\         .  ./", RED_TEXT()));
                 System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /", RED_TEXT()));
@@ -94,8 +104,25 @@ public class Main {
                 System.out.println(colorize("                 -\\  \\     /  /-", RED_TEXT()));
                 System.out.println(colorize("                   \\  \\   /  /", RED_TEXT()));
 
+                }
             }
         } while (true);
+    }
+
+    private static void showLeftOverShips(Collection<Ship> ships) {
+        for (Ship s : ships) {
+            if (!s.isSunk()) {
+                System.out.println("Left over ship: " + s.getName());
+            }
+        }
+    }
+
+    private static void showSunkShips(Collection<Ship> ships) {
+        for (Ship s : ships) {
+            if (s.isSunk()) {
+                System.out.println("Sunk ship: " + s.getName());
+            }
+        }
     }
 
     private static void beep() {
