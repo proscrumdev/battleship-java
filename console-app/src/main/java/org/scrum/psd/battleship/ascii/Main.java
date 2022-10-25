@@ -16,6 +16,8 @@ public class Main {
 
     private static final Telemetry telemetry = new Telemetry();
 
+    private static final String STEP_SEPARATOR = colorize("-----------------------------------------", GREEN_TEXT());
+
     public static void main(String[] args) {
         telemetry.trackEvent("ApplicationStarted", "Technology", "Java");
         System.out.println(colorize("                                     |__", MAGENTA_TEXT()));
@@ -54,7 +56,7 @@ public class Main {
         System.out.println("    \" \"\" \"\" \"\" \"");
 
         do {
-            System.out.println("");
+            System.out.println(STEP_SEPARATOR);
             System.out.println("Player, it's your turn");
             System.out.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
