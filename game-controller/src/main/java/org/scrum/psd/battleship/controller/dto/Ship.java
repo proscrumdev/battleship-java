@@ -3,6 +3,9 @@ package org.scrum.psd.battleship.controller.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.diogonunes.jcolor.Ansi.colorize;
+import static com.diogonunes.jcolor.Attribute.*;
+
 public class Ship {
     private boolean isPlaced;
     private String name;
@@ -95,7 +98,7 @@ public class Ship {
     public void setHitCount() {
         this.hitCount++;
         if (isSunk()) {
-            System.out.println("Sunk ship: " + this.getName());
+            System.out.println(colorize("WOOOOOW!!!! Sunk ship: " + this.getName(), YELLOW_TEXT()));
         }
     }
 
