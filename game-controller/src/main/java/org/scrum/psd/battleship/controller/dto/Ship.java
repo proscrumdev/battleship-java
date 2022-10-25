@@ -94,6 +94,9 @@ public class Ship {
 
     public void setHitCount() {
         this.hitCount++;
+        if (isSunk()) {
+            System.out.println("Sunk ship: " + this.getName());
+        }
     }
 
     public boolean isSunk() {

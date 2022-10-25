@@ -151,6 +151,4 @@ public class MainEndToEndTest {
             Assert.assertTrue(systemOutRule.getLog().contains("Miss. Position is outside of field. Try again."));
         }
     }
-
-
 }
