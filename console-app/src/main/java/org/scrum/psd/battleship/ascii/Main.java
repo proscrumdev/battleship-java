@@ -70,7 +70,7 @@ public class Main {
             else {
                 Position position = parsePosition(input);
 
-                while (position == null || !position.toString().matches("[A-H][1-8]")){
+                while (position == null || !position.toString().matches("[a-hA-H][1-8]")){
                     if (position == null){
                         System.out.println("Invalid position, please enter a valid position (i.e A3):");
                     } else {
@@ -181,7 +181,7 @@ public class Main {
                 String positionInput = scanner.next();
 
                 // check if input is valid
-                while (!positionInput.matches("[A-H][1-8]")) {
+                while (!positionInput.matches("[a-hA-H][1-8]")) {
                     System.out.println("Invalid position, please enter a valid position (i.e A3):");
                     positionInput = scanner.next();
                 }
