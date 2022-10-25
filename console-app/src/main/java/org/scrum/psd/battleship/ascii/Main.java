@@ -106,7 +106,7 @@ public class Main {
 
                 }
             }
-        } while (hitCounter < 17);
+        } while (true);
     }
 
     private static void showLeftOverShips(Collection<Ship> ships) {
