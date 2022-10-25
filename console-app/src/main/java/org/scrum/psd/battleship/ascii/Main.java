@@ -93,7 +93,6 @@ public class Main {
                 }
 
                 System.out.println(isHit ? colorize("Yeah ! Nice hit !", RED_TEXT()) : colorize("~~~~~~~~~~~~ Miss ~~~~~~~~~~~~", BLUE_TEXT()));
-                System.out.println(hitCounter);
                 // check if all ships are sunk
                 if (hitCounter == 16) {
                     System.out.println(colorize("You won !", RED_TEXT()));
