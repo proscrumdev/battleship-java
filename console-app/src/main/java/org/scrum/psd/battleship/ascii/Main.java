@@ -63,15 +63,13 @@ public class Main {
             String input = scanner.next();
             if (input.equals("S")) {
                 showSunkShips(enemyFleet);
-            } else
-            if (input.equals("L")) {
+            } else if (input.equals("L")) {
                 showLeftOverShips(enemyFleet);
-            }
-            else {
+            } else {
                 Position position = parsePosition(input);
 
-                while (position == null || !position.toString().matches("[a-hA-H][1-8]")){
-                    if (position == null){
+                while (position == null || !position.toString().matches("[a-hA-H][1-8]")) {
+                    if (position == null) {
                         System.out.println("Invalid position, please enter a valid position (i.e A3):");
                     } else {
                         System.out.println("Miss. Position is outside of field. Try again.");
@@ -84,35 +82,40 @@ public class Main {
                     beep();
                     hitCounter++;
 
-                System.out.println(colorize("                \\         .  ./", RED_TEXT()));
-                System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /", RED_TEXT()));
-                System.out.println(colorize("                  (M^^.^~~:.'\" \").", RED_TEXT()));
-                System.out.println(colorize("            -   (/  .    . . \\ \\)  -", RED_TEXT()));
-                System.out.println(colorize("               ((| :. ~ ^  :. .|))", RED_TEXT()));
-                System.out.println(colorize("            -   (\\- |  \\ /  |  /)  -", RED_TEXT()));
-                System.out.println(colorize("                 -\\  \\     /  /-", RED_TEXT()));
-                System.out.println(colorize("                   \\  \\   /  /", RED_TEXT()));
-            }
+                    System.out.println(colorize("                \\         .  ./", RED_TEXT()));
+                    System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /", RED_TEXT()));
+                    System.out.println(colorize("                  (M^^.^~~:.'\" \").", RED_TEXT()));
+                    System.out.println(colorize("            -   (/  .    . . \\ \\)  -", RED_TEXT()));
+                    System.out.println(colorize("               ((| :. ~ ^  :. .|))", RED_TEXT()));
+                    System.out.println(colorize("            -   (\\- |  \\ /  |  /)  -", RED_TEXT()));
+                    System.out.println(colorize("                 -\\  \\     /  /-", RED_TEXT()));
+                    System.out.println(colorize("                   \\  \\   /  /", RED_TEXT()));
+                }
 
-            System.out.println(isHit ? colorize("Yeah ! Nice hit !", RED_TEXT()) : colorize("~~~~~~~~~~~~ Miss ~~~~~~~~~~~~", BLUE_TEXT()));
-            telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
+                System.out.println(isHit ? colorize("Yeah ! Nice hit !", RED_TEXT()) : colorize("~~~~~~~~~~~~ Miss ~~~~~~~~~~~~", BLUE_TEXT()));
+                // check if all ships are sunk
+                if (hitCounter == 16) {
+                    System.out.println(colorize("You won !", RED_TEXT()));
+                    break;
+                }
+                telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
 
-            position = getRandomPosition();
-            isHit = GameController.checkIsHit(myFleet, position);
-            System.out.println("");
-            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? colorize("hit your ship !", RED_TEXT()) : colorize("~~~~~~~~~~~~ miss ~~~~~~~~~~~~", BLUE_TEXT())));
-            telemetry.trackEvent("Computer_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
-            if (isHit) {
-                beep();
+                position = getRandomPosition();
+                isHit = GameController.checkIsHit(myFleet, position);
+                System.out.println("");
+                System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? colorize("hit your ship !", RED_TEXT()) : colorize("~~~~~~~~~~~~ miss ~~~~~~~~~~~~", BLUE_TEXT())));
+                telemetry.trackEvent("Computer_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
+                if (isHit) {
+                    beep();
 
-                System.out.println(colorize("                \\         .  ./", RED_TEXT()));
-                System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /", RED_TEXT()));
-                System.out.println(colorize("                  (M^^.^~~:.'\" \").", RED_TEXT()));
-                System.out.println(colorize("            -   (/  .    . . \\ \\)  -", RED_TEXT()));
-                System.out.println(colorize("               ((| :. ~ ^  :. .|))", RED_TEXT()));
-                System.out.println(colorize("            -   (\\- |  \\ /  |  /)  -", RED_TEXT()));
-                System.out.println(colorize("                 -\\  \\     /  /-", RED_TEXT()));
-                System.out.println(colorize("                   \\  \\   /  /", RED_TEXT()));
+                    System.out.println(colorize("                \\         .  ./", RED_TEXT()));
+                    System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /", RED_TEXT()));
+                    System.out.println(colorize("                  (M^^.^~~:.'\" \").", RED_TEXT()));
+                    System.out.println(colorize("            -   (/  .    . . \\ \\)  -", RED_TEXT()));
+                    System.out.println(colorize("               ((| :. ~ ^  :. .|))", RED_TEXT()));
+                    System.out.println(colorize("            -   (\\- |  \\ /  |  /)  -", RED_TEXT()));
+                    System.out.println(colorize("                 -\\  \\     /  /-", RED_TEXT()));
+                    System.out.println(colorize("                   \\  \\   /  /", RED_TEXT()));
 
                 }
             }
