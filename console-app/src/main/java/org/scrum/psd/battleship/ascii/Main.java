@@ -198,7 +198,11 @@ public class Main {
         List<Integer> usedIndexRows = new ArrayList<>();
 
         for (Ship s : enemyFleet) {
-            s.getPositions().add(new Position(getRandomRow(rows, usedIndexRows), getRandomColumn(8 - s.getSize())));
+            Letter row = getRandomRow(rows, usedIndexRows);
+            Integer startPosition = getRandomColumn(8 - s.getSize());
+            for (int i = 0; i < s.getSize(); i++) {
+                s.getPositions().add(new Position(row, startPosition + i));
+            }
         }
 
 //        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 4));

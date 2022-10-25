@@ -43,6 +43,8 @@ public class MainTest {
         ).collect(Collectors.toList());
 
         Set<String> stringPositions = positions.stream().map(Position::toString).collect(Collectors.toSet());
+        System.out.println(stringPositions);
+        System.out.println(positions);
         Assertions.assertEquals(stringPositions.size(), positions.size());
     }
 
