@@ -54,7 +54,7 @@ public class Main {
         System.out.println("    \" \"\" \"\" \"\" \"");
 
         do {
-            System.out.println("");
+            System.out.println("------NEXT ROUND------x");
             System.out.println("Player, it's your turn");
             System.out.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
