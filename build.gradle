@@ -1,5 +1,5 @@
 plugins {
-    id "org.sonarqube" version "3.0"
+    id "org.sonarqube" version "4.4.1.3373"
 }
 
 allprojects {
@@ -11,7 +11,7 @@ allprojects {
     }
 
     jacoco {
-        toolVersion = '0.8.5'
+        toolVersion = '0.8.11'
     }
 }
 
@@ -24,24 +24,20 @@ subprojects {
     sourceCompatibility = 1.8
 
     dependencies {
-        testImplementation 'org.slf4j:slf4j-api:1.7.30',
-                'io.cucumber:cucumber-junit:6.1.2',
-                'io.cucumber:cucumber-java:6.1.2',
-                'org.jacoco:org.jacoco.ant:0.8.5', 
-                'org.junit.jupiter:junit-jupiter-api:5.6.2'
+        testImplementation 'org.slf4j:slf4j-api:2.0.12',
+                'io.cucumber:cucumber-junit:7.15.0',
+                'io.cucumber:cucumber-java:7.15.0',
+                'org.jacoco:org.jacoco.ant:0.8.11',
+                'org.junit.jupiter:junit-jupiter-api:5.10.2'
 
-        testCompileOnly 'junit:junit:4.12'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2',
-                'org.junit.vintage:junit-vintage-engine:5.6.2'
+        testCompileOnly 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2',
+                'org.junit.vintage:junit-vintage-engine:5.10.2'
 
     }
 
     test {
         useJUnitPlatform()
-
-        jacoco {
-            includes = ['org.scrum.psd.battleship.*']
-        }
     }
 }
 
@@ -53,8 +49,4 @@ task copyTestResults {
             include 'TEST-*.xml'
         }
     }
-}
-
-task jacocoMerge(type: JacocoMerge) {
-    executionData fileTree('.').include('**/build/jacoco/*.exec')
 }

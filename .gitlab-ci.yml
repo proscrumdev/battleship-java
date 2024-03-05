@@ -12,7 +12,7 @@ cache:
 unit test:
   stage: test
   script:
-    - ./gradlew test
+    - ./gradlew test jacocoTestReport
 
 build:
   stage: build
