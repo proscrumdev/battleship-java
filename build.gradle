@@ -39,6 +39,12 @@ subprojects {
     test {
         useJUnitPlatform()
     }
+
+    jacocoTestReport {
+        reports {
+            xml.required = true
+        }
+    }
 }
 
 task copyTestResults {
