@@ -138,7 +138,7 @@ public class Main {
                 String positionInput = scanner.next();
                 if(!previousPosition.isEmpty() && !validateInput(previousPosition, positionInput)) {
                     i = i - 1;
-                    System.out.println("Invalid input, please make sure that all positions is in a horizontal or vertical row and gaps are not allowed");
+                    System.out.println(colorize("Invalid input, please make sure that all positions is in a horizontal or vertical row and gaps are not allowed", RED_TEXT()));
                     continue;
                 }
                 ship.addPosition(positionInput);
