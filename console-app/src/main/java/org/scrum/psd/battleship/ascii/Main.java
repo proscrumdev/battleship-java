@@ -13,6 +13,8 @@ import static com.diogonunes.jcolor.Attribute.*;
 public class Main {
     private static List<Ship> myFleet;
     private static List<Ship> enemyFleet;
+    private static final Set<Position> myGuessedPositions = new HashSet<>();
+    private static final Set<Position> enemyGuessedPositions = new HashSet<>();
 
     private static final Telemetry telemetry = new Telemetry();
 
@@ -68,7 +70,8 @@ public class Main {
             System.out.println(">>> Player, it's your turn");
             System.out.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
-            boolean isHit = GameController.checkIsHit(enemyFleet, position);
+            myGuessedPositions.add(position);
+            boolean isHit = GameController.checkIsHit(enemyFleet, position, myGuessedPositions);
             if (isHit) {
                 beep();
                 System.out.println(colorize("Yeah ! Nice hit !",GREEN_TEXT()));
@@ -84,12 +87,17 @@ public class Main {
             else {
                 System.out.println(colorize("MISS",COLOR_MISSES));
             }
-            // System.out.println(colorize("                                     |__", COLOR_SHIP));
-            //System.out.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+          
+            System.out.println("");
+            System.out.println(colorize("Enemy fleet status", BRIGHT_RED_TEXT()));
+            printFleetStatus(enemyFleet);
+          
             telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
 
             position = getRandomPosition();
-            isHit = GameController.checkIsHit(myFleet, position);
+            enemyGuessedPositions.add(position);
+            isHit = GameController.checkIsHit(myFleet, position, enemyGuessedPositions);
+
             System.out.println("");
             System.out.println("<<< Computer, it's your turn");
             //System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
@@ -110,11 +118,23 @@ public class Main {
             } else {
                 System.out.println(colorize(String.format("Computer shoots in %s%s and %s", position.getColumn(), position.getRow(), "missed"), COLOR_MISSES));
             }
+
+            System.out.println("");
+            System.out.println(colorize("Player fleet status", BRIGHT_GREEN_TEXT()));
+            printFleetStatus(myFleet);
         } while (true);
     }
 
     private static void beep() {
         System.out.print("\007");
+    }
+
+    private static void printFleetStatus(List<Ship> fleet) {
+        fleet.forEach(ship -> {
+            System.out.print(ship.getName() + ": " );
+            String sunk = ship.isSunk() ? "Sunk" : "Unsunken";
+            System.out.println(colorize(sunk, ship.isSunk() ? RED_TEXT() : GREEN_TEXT()));
+        });
     }
 
     protected static Position parsePosition(String input) {
@@ -151,14 +171,54 @@ public class Main {
         for (Ship ship : myFleet) {
             System.out.println("");
             System.out.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
+            String previousPosition = "";
             for (int i = 1; i <= ship.getSize(); i++) {
                 System.out.println(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()));
 
                 String positionInput = scanner.next();
+                if(!previousPosition.isEmpty() && !validateInput(previousPosition, positionInput)) {
+                    i = i - 1;
+                    System.out.println(colorize("Invalid input, please make sure that all positions is in a horizontal or vertical row and gaps are not allowed", RED_TEXT()));
+                    continue;
+                }
                 ship.addPosition(positionInput);
+                previousPosition = positionInput;
                 telemetry.trackEvent("Player_PlaceShipPosition", "Position", positionInput, "Ship", ship.getName(), "PositionInShip", Integer.valueOf(i).toString());
             }
         }
+    }
+
+    private static boolean validateInput(String previousPosition, String positionInput) {
+        int prevLetterInt = previousPosition.toUpperCase().substring(0, 1).toCharArray()[0];
+        int prevNumber = Integer.parseInt(previousPosition.substring(1));
+        int curLetterInt = positionInput.toUpperCase().substring(0, 1).toCharArray()[0];
+        int curNumber = Integer.parseInt(positionInput.substring(1));
+        if(curLetterInt != prevLetterInt && curNumber != prevNumber) {
+            return false;
+        }
+        if(curLetterInt - prevLetterInt > 1 && curNumber == prevNumber) {
+            return false;
+        }
+        if(curNumber - prevNumber > 1 && curLetterInt == prevLetterInt) {
+            return false;
+        }
+        return validateOverlap(positionInput);
+    }
+
+    private static boolean validateOverlap(String positionInput) {
+        Letter letter = Letter.valueOf(positionInput.toUpperCase().substring(0, 1));
+        int number = Integer.parseInt(positionInput.substring(1));
+        Position inputPosition = new Position(letter, number);
+        for (Ship ship : myFleet) {
+            for (int i = 1; i <= ship.getSize(); i++) {
+                for (Position position : ship.getPositions()){
+                    if(position.getColumn().toString() == inputPosition.getColumn().toString() && position.getRow() == inputPosition.getRow()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     private static void InitializeEnemyFleet() {
