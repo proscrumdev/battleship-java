@@ -16,22 +16,27 @@ public class Main {
 
     private static final Telemetry telemetry = new Telemetry();
 
-
+    private static final com.diogonunes.jcolor.Attribute COLOR_SHIP = com.diogonunes.jcolor.Attribute.MAGENTA_TEXT();
+    //private static final com.diogonunes.jcolor.Attribute COLOR_MESSAGES = com.diogonunes.jcolor.Attribute.WHITE_TEXT();
+    private static final com.diogonunes.jcolor.Attribute COLOR_HITS = com.diogonunes.jcolor.Attribute.RED_TEXT();
+    private static final com.diogonunes.jcolor.Attribute COLOR_MISSES = com.diogonunes.jcolor.Attribute.BLUE_TEXT();
+    private static final com.diogonunes.jcolor.Attribute COLOR_INSTRUCTIONS = com.diogonunes.jcolor.Attribute.CYAN_TEXT();
+    private static final com.diogonunes.jcolor.Attribute COLOR_INSTRUCTIONS_BG = com.diogonunes.jcolor.Attribute.WHITE_BACK();
     public static void main(String[] args) {
         telemetry.trackEvent("ApplicationStarted", "Technology", "Java");
-        System.out.println(colorize("                                     |__", MAGENTA_TEXT()));
-        System.out.println(colorize("                                     |\\/", MAGENTA_TEXT()));
-        System.out.println(colorize("                                     ---", MAGENTA_TEXT()));
-        System.out.println(colorize("                                     / | [", MAGENTA_TEXT()));
-        System.out.println(colorize("                              !      | |||", MAGENTA_TEXT()));
-        System.out.println(colorize("                            _/|     _/|-++'", MAGENTA_TEXT()));
-        System.out.println(colorize("                        +  +--|    |--|--|_ |-", MAGENTA_TEXT()));
-        System.out.println(colorize("                     { /|__|  |/\\__|  |--- |||__/", MAGENTA_TEXT()));
-        System.out.println(colorize("                    +---------------___[}-_===_.'____                 /\\", MAGENTA_TEXT()));
-        System.out.println(colorize("                ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _", MAGENTA_TEXT()));
-        System.out.println(colorize(" __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7", MAGENTA_TEXT()));
-        System.out.println(colorize("|                        Welcome to Battleship                         BB-61/", MAGENTA_TEXT()));
-        System.out.println(colorize(" \\_________________________________________________________________________|", MAGENTA_TEXT()));
+        System.out.println(colorize("                                     |__", COLOR_SHIP));
+        System.out.println(colorize("                                     |\\/", COLOR_SHIP));
+        System.out.println(colorize("                                     ---", COLOR_SHIP));
+        System.out.println(colorize("                                     / | [", COLOR_SHIP));
+        System.out.println(colorize("                              !      | |||", COLOR_SHIP));
+        System.out.println(colorize("                            _/|     _/|-++'", COLOR_SHIP));
+        System.out.println(colorize("                        +  +--|    |--|--|_ |-", COLOR_SHIP));
+        System.out.println(colorize("                     { /|__|  |/\\__|  |--- |||__/", COLOR_SHIP));
+        System.out.println(colorize("                    +---------------___[}-_===_.'____                 /\\", COLOR_SHIP));
+        System.out.println(colorize("                ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _", COLOR_SHIP));
+        System.out.println(colorize(" __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7", COLOR_SHIP));
+        System.out.println(colorize("|                        Welcome to Battleship                         BB-61/", COLOR_SHIP));
+        System.out.println(colorize(" \\_________________________________________________________________________|", COLOR_SHIP));
         System.out.println("");
 
         InitializeGame();
@@ -45,7 +50,7 @@ public class Main {
         
 
         System.out.print("\033[2J\033[;H");
-        System.out.println(colorize("GAME STARTING", CYAN_TEXT(), WHITE_BACK()));
+        System.out.println(colorize("GAME STARTING", COLOR_INSTRUCTIONS, COLOR_INSTRUCTIONS_BG));
         System.out.println(colorize("Each player (starting with player 1) will be prompted to select an enemy position to attack, repeating until one player has sunk all their opponent's ships", CYAN_TEXT(), WHITE_BACK()));
         System.out.println("                  __");
         System.out.println("                 /  \\");
@@ -67,19 +72,19 @@ public class Main {
             if (isHit) {
                 beep();
                 System.out.println(colorize("Yeah ! Nice hit !",GREEN_TEXT()));
-                System.out.println(colorize("                \\         .  ./",RED_TEXT()));
-                System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /",RED_TEXT()));
-                System.out.println(colorize("                  (M^^.^~~:.'\" \").",RED_TEXT()));
-                System.out.println(colorize("            -   (/  .    . . \\ \\)  -",RED_TEXT()));
-                System.out.println(colorize("               ((| :. ~ ^  :. .|))",RED_TEXT()));
-                System.out.println(colorize("            -   (\\- |  \\ /  |  /)  -",RED_TEXT()));
-                System.out.println(colorize("                 -\\  \\     /  /-",RED_TEXT()));
-                System.out.println(colorize("                   \\  \\   /  /",RED_TEXT()));
+                System.out.println(colorize("                \\         .  ./",COLOR_HITS));
+                System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /",COLOR_HITS));
+                System.out.println(colorize("                  (M^^.^~~:.'\" \").",COLOR_HITS));
+                System.out.println(colorize("            -   (/  .    . . \\ \\)  -",COLOR_HITS));
+                System.out.println(colorize("               ((| :. ~ ^  :. .|))",COLOR_HITS));
+                System.out.println(colorize("            -   (\\- |  \\ /  |  /)  -",COLOR_HITS));
+                System.out.println(colorize("                 -\\  \\     /  /-",COLOR_HITS));
+                System.out.println(colorize("                   \\  \\   /  /",COLOR_HITS));
             }
             else {
-                System.out.println(colorize("MISS",BLUE_TEXT()));
+                System.out.println(colorize("MISS",COLOR_MISSES));
             }
-            // System.out.println(colorize("                                     |__", MAGENTA_TEXT()));
+            // System.out.println(colorize("                                     |__", COLOR_SHIP));
             //System.out.println(isHit ? "Yeah ! Nice hit !" : "Miss");
             telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
 
@@ -90,20 +95,20 @@ public class Main {
             //System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
             telemetry.trackEvent("Computer_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
             if (isHit) {
-                System.out.println(colorize(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), "hit your ship !"),RED_TEXT()));
+                System.out.println(colorize(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), "hit your ship !"),COLOR_HITS));
                 beep();
                 System.out.println(colorize("Yeah ! Nice hit !",GREEN_TEXT()));
-                System.out.println(colorize("                \\         .  ./",RED_TEXT()));
-                System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /",RED_TEXT()));
-                System.out.println(colorize("                  (M^^.^~~:.'\" \").",RED_TEXT()));
-                System.out.println(colorize("            -   (/  .    . . \\ \\)  -",RED_TEXT()));
-                System.out.println(colorize("               ((| :. ~ ^  :. .|))",RED_TEXT()));
-                System.out.println(colorize("            -   (\\- |  \\ /  |  /)  -",RED_TEXT()));
-                System.out.println(colorize("                 -\\  \\     /  /-",RED_TEXT()));
-                System.out.println(colorize("                   \\  \\   /  /",RED_TEXT()));
+                System.out.println(colorize("                \\         .  ./",COLOR_HITS));
+                System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /",COLOR_HITS));
+                System.out.println(colorize("                  (M^^.^~~:.'\" \").",COLOR_HITS));
+                System.out.println(colorize("            -   (/  .    . . \\ \\)  -",COLOR_HITS));
+                System.out.println(colorize("               ((| :. ~ ^  :. .|))",COLOR_HITS));
+                System.out.println(colorize("            -   (\\- |  \\ /  |  /)  -",COLOR_HITS));
+                System.out.println(colorize("                 -\\  \\     /  /-",COLOR_HITS));
+                System.out.println(colorize("                   \\  \\   /  /",COLOR_HITS));
 
             } else {
-                System.out.println(colorize(String.format("Computer shoots in %s%s and %s", position.getColumn(), position.getRow(), "missed"), BLUE_TEXT()));
+                System.out.println(colorize(String.format("Computer shoots in %s%s and %s", position.getColumn(), position.getRow(), "missed"), COLOR_MISSES));
             }
         } while (true);
     }
@@ -138,7 +143,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         myFleet = GameController.initializeShips();
 
-        System.out.println(colorize("SETUP PHASE", CYAN_TEXT(), WHITE_BACK()));
+        System.out.println(colorize("SETUP PHASE", COLOR_INSTRUCTIONS, COLOR_INSTRUCTIONS_BG));
         System.out.println("");
         System.out.println(colorize("You will be prompted to enter the positions of each ship one at a time.", CYAN_TEXT(), WHITE_BACK()));
         System.out.println(colorize("Game board has size from A to H and 1 to 8.", CYAN_TEXT(), WHITE_BACK()));
