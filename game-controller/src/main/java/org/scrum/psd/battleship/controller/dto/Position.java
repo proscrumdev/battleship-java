@@ -44,4 +44,8 @@ public class Position {
 
         return false;
     }
+
+    @Override public int hashCode() {
+        return column.hashCode() + row;
+    }
 }
