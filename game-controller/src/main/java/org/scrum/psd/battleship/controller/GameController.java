@@ -5,13 +5,11 @@ import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
 import org.scrum.psd.battleship.controller.dto.Ship;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GameController {
-    public static boolean checkIsHit(Collection<Ship> ships, Position shot) {
+
+    public static boolean checkIsHit(Collection<Ship> ships, Position shot, Set<Position> guessedPositions) {
         if (ships == null) {
             throw new IllegalArgumentException("ships is null");
         }
@@ -22,6 +20,11 @@ public class GameController {
 
         for (Ship ship : ships) {
             for (Position position : ship.getPositions()) {
+
+                if (guessedPositions.containsAll(ship.getPositions())) {
+                    ship.setSunk(true);
+                }
+
                 if (position.equals(shot)) {
                     return true;
                 }

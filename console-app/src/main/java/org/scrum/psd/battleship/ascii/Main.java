@@ -13,6 +13,8 @@ import static com.diogonunes.jcolor.Attribute.*;
 public class Main {
     private static List<Ship> myFleet;
     private static List<Ship> enemyFleet;
+    private static final Set<Position> myGuessedPositions = new HashSet<>();
+    private static final Set<Position> enemyGuessedPositions = new HashSet<>();
 
     private static final Telemetry telemetry = new Telemetry();
 
@@ -58,7 +60,8 @@ public class Main {
             System.out.println("Player, it's your turn");
             System.out.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
-            boolean isHit = GameController.checkIsHit(enemyFleet, position);
+            myGuessedPositions.add(position);
+            boolean isHit = GameController.checkIsHit(enemyFleet, position, myGuessedPositions);
             if (isHit) {
                 beep();
 
@@ -73,10 +76,17 @@ public class Main {
             }
 
             System.out.println(isHit ? "Yeah ! Nice hit !" : "Miss");
+            System.out.println("");
+
+            System.out.println(colorize("Enemy fleet status", BRIGHT_RED_TEXT()));
+            printFleetStatus(enemyFleet);
+
             telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
 
             position = getRandomPosition();
-            isHit = GameController.checkIsHit(myFleet, position);
+            enemyGuessedPositions.add(position);
+            isHit = GameController.checkIsHit(myFleet, position, enemyGuessedPositions);
+
             System.out.println("");
             System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
             telemetry.trackEvent("Computer_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
@@ -93,11 +103,23 @@ public class Main {
                 System.out.println("                   \\  \\   /  /");
 
             }
+
+            System.out.println("");
+            System.out.println(colorize("Player fleet status", BRIGHT_GREEN_TEXT()));
+            printFleetStatus(myFleet);
         } while (true);
     }
 
     private static void beep() {
         System.out.print("\007");
+    }
+
+    private static void printFleetStatus(List<Ship> fleet) {
+        fleet.forEach(ship -> {
+            System.out.print(ship.getName() + ": " );
+            String sunk = ship.isSunk() ? "Sunk" : "Unsunken";
+            System.out.println(colorize(sunk, ship.isSunk() ? RED_TEXT() : GREEN_TEXT()));
+        });
     }
 
     protected static Position parsePosition(String input) {

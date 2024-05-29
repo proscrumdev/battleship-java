@@ -9,6 +9,15 @@ public class Ship {
     private int size;
     private List<Position> positions;
     private Color color;
+    private boolean isSunk;
+
+    public boolean isSunk() {
+        return isSunk;
+    }
+
+    public void setSunk(boolean sunk) {
+        isSunk = sunk;
+    }
 
     public Ship() {
         this.positions = new ArrayList<>();
