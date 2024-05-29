@@ -131,14 +131,54 @@ public class Main {
         for (Ship ship : myFleet) {
             System.out.println("");
             System.out.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
+            String previousPosition = "";
             for (int i = 1; i <= ship.getSize(); i++) {
                 System.out.println(String.format("Enter position %s of %s (i.e A3):", i, ship.getSize()));
 
                 String positionInput = scanner.next();
+                if(!previousPosition.isEmpty() && !validateInput(previousPosition, positionInput)) {
+                    i = i - 1;
+                    System.out.println(colorize("Invalid input, please make sure that all positions is in a horizontal or vertical row and gaps are not allowed", RED_TEXT()));
+                    continue;
+                }
                 ship.addPosition(positionInput);
+                previousPosition = positionInput;
                 telemetry.trackEvent("Player_PlaceShipPosition", "Position", positionInput, "Ship", ship.getName(), "PositionInShip", Integer.valueOf(i).toString());
             }
         }
+    }
+
+    private static boolean validateInput(String previousPosition, String positionInput) {
+        int prevLetterInt = previousPosition.toUpperCase().substring(0, 1).toCharArray()[0];
+        int prevNumber = Integer.parseInt(previousPosition.substring(1));
+        int curLetterInt = positionInput.toUpperCase().substring(0, 1).toCharArray()[0];
+        int curNumber = Integer.parseInt(positionInput.substring(1));
+        if(curLetterInt != prevLetterInt && curNumber != prevNumber) {
+            return false;
+        }
+        if(curLetterInt - prevLetterInt > 1 && curNumber == prevNumber) {
+            return false;
+        }
+        if(curNumber - prevNumber > 1 && curLetterInt == prevLetterInt) {
+            return false;
+        }
+        return validateOverlap(positionInput);
+    }
+
+    private static boolean validateOverlap(String positionInput) {
+        Letter letter = Letter.valueOf(positionInput.toUpperCase().substring(0, 1));
+        int number = Integer.parseInt(positionInput.substring(1));
+        Position inputPosition = new Position(letter, number);
+        for (Ship ship : myFleet) {
+            for (int i = 1; i <= ship.getSize(); i++) {
+                for (Position position : ship.getPositions()){
+                    if(position.getColumn().toString() == inputPosition.getColumn().toString() && position.getRow() == inputPosition.getRow()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     private static void InitializeEnemyFleet() {
