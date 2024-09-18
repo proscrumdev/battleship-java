@@ -57,43 +57,58 @@ public class Main {
             System.out.println("");
             System.out.println("Player, it's your turn");
             System.out.println("Enter coordinates for your shot :");
+
             Position position = parsePosition(scanner.next());
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             if (isHit) {
-                beep();
-
-                System.out.println("                \\         .  ./");
-                System.out.println("              \\      .:\" \";'.:..\" \"   /");
-                System.out.println("                  (M^^.^~~:.'\" \").");
-                System.out.println("            -   (/  .    . . \\ \\)  -");
-                System.out.println("               ((| :. ~ ^  :. .|))");
-                System.out.println("            -   (\\- |  \\ /  |  /)  -");
-                System.out.println("                 -\\  \\     /  /-");
-                System.out.println("                   \\  \\   /  /");
+                print_player_hit();
+            } else {
+                print_player_miss();
             }
 
-            System.out.println(isHit ? "Yeah ! Nice hit !" : "Miss");
             telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
+            System.out.println("");
 
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
-            System.out.println("");
-            System.out.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
-            telemetry.trackEvent("Computer_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
-            if (isHit) {
-                beep();
-
-                System.out.println("                \\         .  ./");
-                System.out.println("              \\      .:\" \";'.:..\" \"   /");
-                System.out.println("                  (M^^.^~~:.'\" \").");
-                System.out.println("            -   (/  .    . . \\ \\)  -");
-                System.out.println("               ((| :. ~ ^  :. .|))");
-                System.out.println("            -   (\\- |  \\ /  |  /)  -");
-                System.out.println("                 -\\  \\     /  /-");
-                System.out.println("                   \\  \\   /  /");
-
+            if (isHit){
+                print_enemy_hit(position);
+            } else {
+                print_enemy_miss(position);
             }
+            telemetry.trackEvent("Computer_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
         } while (true);
+    }
+
+    private static void print_player_hit() {
+        print_hit(GREEN_TEXT());
+        System.out.println(colorize( "Yeah ! Nice hit !", GREEN_TEXT()));
+    }
+
+    private static void print_enemy_hit(Position position) {
+        print_hit(RED_TEXT());
+        System.out.println(colorize(String.format("Computer shoot in %s%s and hit your ship!", position.getColumn(), position.getRow()), RED_TEXT()));
+    }
+
+    private static void print_player_miss() {
+        System.out.println(colorize( "Miss", RED_TEXT()));
+    }
+
+    private static void c5print_enemy_miss(Position position) {
+        System.out.println(colorize(String.format("Computer shoot in %s%s and miss!", position.getColumn(), position.getRow()), GREEN_TEXT()));
+    }
+
+    private static void print_hit(com.diogonunes.jcolor.Attribute color) {
+        beep();
+
+        System.out.println(colorize("                \\         .  ./", color));
+        System.out.println(colorize("              \\      .:\" \";'.:..\" \"   /", color));
+        System.out.println(colorize("                  (M^^.^~~:.'\" \").", color));
+        System.out.println(colorize("            -   (/  .    . . \\ \\)  -", color));
+        System.out.println(colorize("               ((| :. ~ ^  :. .|))", color));
+        System.out.println(colorize("            -   (\\- |  \\ /  |  /)  -", color));
+        System.out.println(colorize("                 -\\  \\     /  /-", color));
+        System.out.println(colorize("                   \\  \\   /  /", color));
     }
 
     private static void beep() {
