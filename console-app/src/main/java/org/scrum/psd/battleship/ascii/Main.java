@@ -94,7 +94,7 @@ public class Main {
         System.out.println(colorize( "Miss", RED_TEXT()));
     }
 
-    private static void c5print_enemy_miss(Position position) {
+    private static void print_enemy_miss(Position position) {
         System.out.println(colorize(String.format("Computer shoot in %s%s and miss!", position.getColumn(), position.getRow()), GREEN_TEXT()));
     }
 
