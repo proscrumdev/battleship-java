@@ -81,8 +81,8 @@ public class Main {
     }
 
     private static void print_player_hit() {
-        print_hit(GREEN_TEXT());
-        System.out.println(colorize( "Yeah ! Nice hit !", GREEN_TEXT()));
+        print_hit(BLUE_TEXT());
+        System.out.println(colorize( "Yeah ! Nice hit !", BLUE_TEXT()));
     }
 
     private static void print_enemy_hit(Position position) {
@@ -95,7 +95,7 @@ public class Main {
     }
 
     private static void print_enemy_miss(Position position) {
-        System.out.println(colorize(String.format("Computer shoot in %s%s and miss!", position.getColumn(), position.getRow()), GREEN_TEXT()));
+        System.out.println(colorize(String.format("Computer shoot in %s%s and miss!", position.getColumn(), position.getRow()), BLUE_TEXT()));
     }
 
     private static void print_hit(com.diogonunes.jcolor.Attribute color) {
