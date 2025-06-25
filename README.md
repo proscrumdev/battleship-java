@@ -31,7 +31,7 @@ run the game inside Docker instead.
 ### Run a Docker Container from the Image
 
 ```bash
-docker run -it -v ${PWD}:/battleship -w /battleship openjdk:15 bash
+docker run -it -v ${PWD}:/battleship -w /battleship openjdk:23 bash
 ```
 
 This will run a Docker container with your battleship case study mounted into it. The container will run in interactive mode and you can execute Gradle commands from the shell (see examples below).
