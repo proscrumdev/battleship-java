@@ -1,5 +1,6 @@
 package org.scrum.psd.battleship.ascii;
 
+import com.diogonunes.jcolor.Attribute;
 import org.scrum.psd.battleship.controller.GameController;
 import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
@@ -53,28 +54,32 @@ public class Main {
         System.out.println("   \\    \\_/");
         System.out.println("    \" \"\" \"\" \"\" \"");
 
+        Attribute playerColor = YELLOW_TEXT();
+        Attribute cpuColor = MAGENTA_TEXT();
         do {
-            System.out.println("");
-            System.out.println("Player, it's your turn");
-            System.out.println("Enter coordinates for your shot :");
+            System.out.println(colorize("////////////////Player's turn////////////////", playerColor));
+            System.out.println(colorize("Enter coordinates for your shot :", playerColor));
             Position position = parsePosition(scanner.next());
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             if (isHit) {
-                printHit();
+                printHit(playerColor);
             } else {
-                printMiss();
+                printMiss(playerColor);
             }
+            System.out.println();
             telemetry.trackEvent("Player_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
 
+            // Computer's turn
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
-            System.out.println("");
-            System.out.println(String.format("Computer shoot in %s%s.", position.getColumn(), position.getRow()));
+            System.out.println(colorize("////////////////Cpu's turn////////////////", cpuColor));
+            System.out.println(colorize(String.format("Computer shoot in %s%s.", position.getColumn(), position.getRow()), cpuColor));
             if (isHit) {
-                printHit();
+                printHit(cpuColor);
             } else {
-                printMiss();
+                printMiss(cpuColor);
             }
+            System.out.println();
             telemetry.trackEvent("Computer_ShootPosition", "Position", position.toString(), "IsHit", Boolean.valueOf(isHit).toString());
         } while (true);
     }
@@ -150,7 +155,7 @@ public class Main {
         enemyFleet.get(4).getPositions().add(new Position(Letter.C, 6));
     }
 
-    private static void printHit() {
+    private static void printHit(Attribute color) {
         beep();
 
         System.out.println(colorize("                \\         .  ./", GREEN_TEXT()));
@@ -162,11 +167,11 @@ public class Main {
         System.out.println(colorize("                 -\\  \\     /  /-", GREEN_TEXT()));
         System.out.println(colorize("                   \\  \\   /  /", GREEN_TEXT()));
 
-        System.out.println(colorize("A ship was hit !", GREEN_TEXT()));
+        System.out.println(colorize("A ship was hit !", color));
     }
 
-    private static void printMiss(){
-        System.out.println(colorize("The shot went into water. It's a miss !", BLUE_TEXT()));
+    private static void printMiss(Attribute color){
+        System.out.println(colorize("The shot went into water. ", BLUE_TEXT()) + colorize("It's a miss !", color));
     }
 
 }
