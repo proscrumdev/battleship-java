@@ -12,6 +12,8 @@ import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
 
 public class Main {
+
+    private static final String BOARD_SIZE_HINT = "(Game board has size from A to H and 1 to 8)";
     private static List<Ship> myFleet;
     private static List<Ship> enemyFleet;
 
@@ -58,7 +60,7 @@ public class Main {
         Attribute cpuColor = MAGENTA_TEXT();
         do {
             System.out.println(colorize("////////////////Player's turn////////////////", playerColor));
-            System.out.println(colorize("Enter coordinates for your shot :", playerColor));
+            System.out.println(colorize("Enter coordinates for your shot " + BOARD_SIZE_HINT + " :", playerColor));
             Position position = parsePosition(scanner.next());
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             if (isHit) {
@@ -114,7 +116,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         myFleet = GameController.initializeShips();
 
-        System.out.println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
+        System.out.println("Please position your fleet " + BOARD_SIZE_HINT + " :");
 
         for (Ship ship : myFleet) {
             System.out.println("");
