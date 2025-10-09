@@ -24,7 +24,7 @@ public class MainEndToEndTest {
             Main.main(new String[]{});
         } catch(NoSuchElementException e) {
             Assert.assertTrue(systemOutRule.getLog().contains("Welcome to Battleship"));
-            Assert.assertTrue(systemOutRule.getLog().contains("Yeah ! Nice hit !"));
+            Assert.assertTrue(systemOutRule.getLog().contains("A ship was hit !"));
         }
     }
 
@@ -36,7 +36,7 @@ public class MainEndToEndTest {
             Main.main(new String[]{});
         } catch(NoSuchElementException e) {
             Assert.assertTrue(systemOutRule.getLog().contains("Welcome to Battleship"));
-            Assert.assertTrue(systemOutRule.getLog().contains("Miss"));
+            Assert.assertTrue(systemOutRule.getLog().contains("miss"));
         }
     }
 }
