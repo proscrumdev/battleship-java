@@ -1,0 +1,16 @@
+on: [push]
+jobs:
+  ci:
+    runs-on: docker
+    container:
+      image: pgoetz/forgejo-runner-container:latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          ./gradlew test jacocoTestReport
+          ./gradlew build
+          ./gradlew pmdMain pmdTest
+      - uses: actions/upload-artifact@v3
+        with:
+          name: battleship
+          path: console-app/build/distributions
